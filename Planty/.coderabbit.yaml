@@ -1,0 +1,6 @@
+# .coderabbit.yaml
+reviews:
+  profile: chill
+  target_branches:
+    - main
+    - develop
