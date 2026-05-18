@@ -24,6 +24,52 @@
             </objects>
             <point key="canvasLocation" x="1288" y="293"/>
         </scene>
+        <!--Add Diary View Controller-->
+        <scene sceneID="r6q-RZ-0qh">
+            <objects>
+                <viewController storyboardIdentifier="AddDiaryVC" id="NJm-sn-XyE" customClass="AddDiaryViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3dq-0B-xiD">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V8A-8C-cpH" userLabel="Title">
+                                <rect key="frame" x="20" y="218" width="353" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Vx5-g6-sx9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v4x-0D-g1x" userLabel="Content">
+                                <rect key="frame" x="20" y="278" width="353" height="526"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4uJ-4w-jyv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="v4x-0D-g1x" firstAttribute="leading" secondItem="4uJ-4w-jyv" secondAttribute="leading" constant="20" id="3wU-CJ-DHg"/>
+                            <constraint firstItem="v4x-0D-g1x" firstAttribute="top" secondItem="V8A-8C-cpH" secondAttribute="bottom" constant="16" id="4ez-G1-Iiw"/>
+                            <constraint firstItem="4uJ-4w-jyv" firstAttribute="trailing" secondItem="v4x-0D-g1x" secondAttribute="trailing" constant="20" id="EeG-j6-NpI"/>
+                            <constraint firstItem="4uJ-4w-jyv" firstAttribute="trailing" secondItem="V8A-8C-cpH" secondAttribute="trailing" constant="20" id="MN0-fD-feA"/>
+                            <constraint firstItem="V8A-8C-cpH" firstAttribute="top" secondItem="4uJ-4w-jyv" secondAttribute="top" constant="100" id="XA3-U6-GEn"/>
+                            <constraint firstItem="V8A-8C-cpH" firstAttribute="leading" secondItem="4uJ-4w-jyv" secondAttribute="leading" constant="20" id="blD-MU-Gk1"/>
+                            <constraint firstItem="4uJ-4w-jyv" firstAttribute="bottom" secondItem="v4x-0D-g1x" secondAttribute="bottom" constant="-20" id="wSM-K5-T6g"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentTextView" destination="v4x-0D-g1x" id="Ady-cL-Gf9"/>
+                        <outlet property="titleTextField" destination="V8A-8C-cpH" id="taL-EX-fST"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wrt-G7-8Kv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2065" y="392"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="pET-wd-xlu">
             <objects>
@@ -469,6 +515,9 @@
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="sparkles" catalog="system" width="115" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
