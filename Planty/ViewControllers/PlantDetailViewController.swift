@@ -116,6 +116,13 @@ class PlantDetailViewController: UIViewController {
         dDayLabel.text = "D + \(plant.dDay)"
         speciesLabel.text = "품종: \(plant.species)"
         
+        // 식물 사진 표시 추가!
+        if let image = plant.photoImage {
+            plantImageView.image = image
+        } else {
+            plantImageView.backgroundColor = .lightGray // 사진 없으면 회색
+        }
+        
         // 식물 일기가 있으면 사용
         if !plant.diaries.isEmpty {
             diaries = plant.diaries

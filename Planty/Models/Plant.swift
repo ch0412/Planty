@@ -5,6 +5,7 @@
 //  Created by choeun on 5/17/26.
 //
 import Foundation
+import UIKit
 
 struct Plant {
     let id: UUID
@@ -13,6 +14,7 @@ struct Plant {
     var startDate: Date
     var waterCycle: Int
     var diaries: [DiaryEntry]
+    var photoImage: UIImage?
     
     var dDay: Int {
         let calendar = Calendar.current
@@ -29,5 +31,6 @@ struct Plant {
         self.startDate = startDate
         self.waterCycle = waterCycle
         self.diaries = []
+        self.photoImage = nil
     }
 }

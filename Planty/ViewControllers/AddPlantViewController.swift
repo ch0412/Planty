@@ -19,6 +19,7 @@ class AddPlantViewController: UIViewController {
     var selectedDate: Date = Date()
     var selectedWaterCycle: Int = 3
     let waterCycleOptions = [1, 2, 3, 5, 7, 10, 14, 21, 30]
+    var selectedImage: UIImage?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -118,6 +119,11 @@ class AddPlantViewController: UIViewController {
     // MARK: - Actions
     @objc func photoButtonTapped() {
         print("사진 추가")
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        present(picker, animated: true)
     }
     
     @objc func dateChanged(_ sender: UIDatePicker) {
@@ -142,12 +148,13 @@ class AddPlantViewController: UIViewController {
             return
         }
         
-        let newPlant = Plant(
+        var newPlant = Plant(
             name: nickname,
             species: species,
             startDate: selectedDate,
             waterCycle: selectedWaterCycle
         )
+        newPlant.photoImage = selectedImage
         
         delegate?.didAddPlant(newPlant)
         dismiss(animated: true)
@@ -183,5 +190,28 @@ extension AddPlantViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedWaterCycle = waterCycleOptions[row]
         waterCycleTextField.text = "\(waterCycleOptions[row])일마다"
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension AddPlantViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.editedImage] as? UIImage {
+            selectedImage = image
+            
+            // photoView에 이미지 표시
+            let imageView = UIImageView(frame: photoView.bounds)
+            imageView.image = image
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.layer.cornerRadius = 8
+            photoView.addSubview(imageView)
+        }
+        dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
     }
 }
