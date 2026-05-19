@@ -8,6 +8,7 @@ class PlantDetailViewController: UIViewController {
     @IBOutlet weak var dDayLabel: UILabel!
     @IBOutlet weak var speciesLabel: UILabel!
     @IBOutlet weak var diaryTableView: UITableView!
+    @IBOutlet weak var addButton: UIButton!    // ✅ 추가
     
     // MARK: - Properties
     var plant: Plant?
@@ -34,56 +35,9 @@ class PlantDetailViewController: UIViewController {
     
     // MARK: - Setup
     private func setupUI() {
-        view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.93, alpha: 1.0)
-        
-        plantImageView.contentMode = .scaleAspectFill
-        plantImageView.clipsToBounds = true
-        plantImageView.backgroundColor = .lightGray
-        
-        plantNameLabel.font = UIFont.boldSystemFont(ofSize: 28)
-        dDayLabel.font = UIFont.systemFont(ofSize: 16)
-        dDayLabel.textColor = .darkGray
-        speciesLabel.font = UIFont.systemFont(ofSize: 14)
-        speciesLabel.textColor = .gray
-        
-        diaryTableView.backgroundColor = .clear
-        diaryTableView.separatorStyle = .none
-        
-        // 뒤로가기 버튼
-        let backButton = UIButton()
-        backButton.backgroundColor = UIColor(red: 0.6, green: 0.8, blue: 0.6, alpha: 0.9)
-        backButton.layer.cornerRadius = 28
-        backButton.setTitle("<", for: .normal)
-        backButton.setTitleColor(.white, for: .normal)
-        backButton.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .medium)
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        
-        // 일기 추가 버튼
-        let addButton = UIButton()
-        addButton.backgroundColor = UIColor(red: 0.6, green: 0.8, blue: 0.6, alpha: 0.9)
+        // 버튼 cornerRadius만 코드로 처리
         addButton.layer.cornerRadius = 28
-        addButton.setTitle("+", for: .normal)
-        addButton.setTitleColor(.white, for: .normal)
-        addButton.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .light)
-        addButton.addTarget(self, action: #selector(addDiaryButtonTapped), for: .touchUpInside)
-        
-        view.addSubview(backButton)
-        view.addSubview(addButton)
-        
-        backButton.translatesAutoresizingMaskIntoConstraints = false
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            backButton.widthAnchor.constraint(equalToConstant: 56),
-            backButton.heightAnchor.constraint(equalToConstant: 56),
-            
-            addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            addButton.widthAnchor.constraint(equalToConstant: 56),
-            addButton.heightAnchor.constraint(equalToConstant: 56)
-        ])
+        addButton.layer.masksToBounds = true
     }
     
     private func setupTableView() {
@@ -114,23 +68,23 @@ class PlantDetailViewController: UIViewController {
         diaryTableView.reloadData()
     }
     
-    // MARK: - Actions
-    @objc func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-        dismiss(animated: true)
+    @IBAction func addDiaryButtonTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "showAddDiary", sender: nil)
     }
     
-    @objc func addDiaryButtonTapped() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(
-            withIdentifier: "AddDiaryVC"
-        ) as! AddDiaryViewController
-        
-        vc.delegate = self
-        
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .pageSheet
-        present(nav, animated: true)
+    // MARK: - Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAddDiary" {
+            if let nav = segue.destination as? UINavigationController,
+               let vc = nav.topViewController as? AddDiaryViewController {
+                vc.delegate = self
+                // 수정 모드인 경우
+                if let indexPath = sender as? IndexPath {
+                    vc.diary = diaries[indexPath.row]
+                    vc.diaryIndex = indexPath.row
+                }
+            }
+        }
     }
 }
 
@@ -151,20 +105,8 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
         return UITableView.automaticDimension
     }
     
-    // 일지 클릭시 수정 화면으로
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(
-            withIdentifier: "AddDiaryVC"
-        ) as! AddDiaryViewController
-        
-        vc.delegate = self
-        vc.diary = diaries[indexPath.row]
-        vc.diaryIndex = indexPath.row
-        
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .pageSheet
-        present(nav, animated: true)
+        performSegue(withIdentifier: "showAddDiary", sender: indexPath)
     }
 }
 
@@ -172,10 +114,8 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
 extension PlantDetailViewController: AddDiaryDelegate {
     func didAddDiary(_ diary: DiaryEntry, index: Int?) {
         if let index = index {
-            // 수정
             diaries[index] = diary
         } else {
-            // 새로 추가
             diaries.insert(diary, at: 0)
         }
         plant?.diaries = diaries

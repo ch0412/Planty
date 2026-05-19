@@ -11,10 +11,11 @@ class AddDiaryViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var contentTextView: UITextView!
+    @IBOutlet weak var photoButton: UIButton!  // ✅ 추가
     
     // MARK: - Properties
     weak var delegate: AddDiaryDelegate?
-    var selectedImages: [UIImage] = [] // ← 배열로 변경
+    var selectedImages: [UIImage] = []
     var diary: DiaryEntry?
     var diaryIndex: Int?
     
@@ -36,39 +37,20 @@ class AddDiaryViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         setupNavigationBar()
+        setupTitleLine()
         setupPhotoCollectionView()
         loadExistingDiary()
     }
     
     // MARK: - Setup
     private func setupNavigationBar() {
+        // diary 있으면 수정, 없으면 작성
         title = diary == nil ? "일지 작성" : "일지 수정"
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: "취소",
-            style: .plain,
-            target: self,
-            action: #selector(backButtonTapped)
-        )
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: "저장",
-            style: .done,
-            target: self,
-            action: #selector(doneButtonTapped)
-        )
     }
     
-    private func setupUI() {
-        view.backgroundColor = .white
-        
-        // 제목 TextField
-        titleTextField.placeholder = "제목"
-        titleTextField.borderStyle = .none
-        titleTextField.font = UIFont.systemFont(ofSize: 18)
-        
-        // 구분선
+    private func setupTitleLine() {
+        // 구분선 코드로만 가능
         let titleLine = UIView()
         titleLine.backgroundColor = .lightGray
         titleLine.translatesAutoresizingMaskIntoConstraints = false
@@ -78,30 +60,6 @@ class AddDiaryViewController: UIViewController {
             titleLine.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleLine.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             titleLine.heightAnchor.constraint(equalToConstant: 0.5)
-        ])
-        
-        // 내용 TextView
-        contentTextView.font = UIFont.systemFont(ofSize: 16)
-        contentTextView.backgroundColor = .clear
-        contentTextView.delegate = self
-        contentTextView.text = "오늘의 일지 작성..."
-        contentTextView.textColor = .lightGray
-        
-        // 사진 추가 버튼
-        let photoButton = UIButton()
-        photoButton.setImage(UIImage(systemName: "photo.badge.plus"), for: .normal)
-        photoButton.tintColor = .gray
-        photoButton.contentVerticalAlignment = .fill
-        photoButton.contentHorizontalAlignment = .fill
-        photoButton.addTarget(self, action: #selector(photoButtonTapped), for: .touchUpInside)
-        
-        view.addSubview(photoButton)
-        photoButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            photoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            photoButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            photoButton.widthAnchor.constraint(equalToConstant: 36),
-            photoButton.heightAnchor.constraint(equalToConstant: 36)
         ])
     }
     
@@ -119,7 +77,6 @@ class AddDiaryViewController: UIViewController {
         ])
     }
     
-    // 기존 일지 불러오기
     private func loadExistingDiary() {
         guard let diary = diary else { return }
         titleTextField.text = diary.title
@@ -129,14 +86,34 @@ class AddDiaryViewController: UIViewController {
         photoCollectionView.reloadData()
     }
     
-    // MARK: - Actions
-    @objc func photoButtonTapped() {
-        // 1. 소스 타입 확인
-        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+    // MARK: - IBActions
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        guard let title = titleTextField.text?.trimmingCharacters(in: .whitespaces),
+              !title.isEmpty else {
+            showAlert(message: "제목을 입력해주세요.")
             return
         }
         
-        // 2. 권한 확인
+        let content = contentTextView.textColor == .lightGray ? "" : contentTextView.text ?? ""
+        
+        let newDiary = DiaryEntry(
+            title: title,
+            content: content,
+            date: diary?.date ?? Date(),
+            photoImages: selectedImages
+        )
+        
+        delegate?.didAddDiary(newDiary, index: diaryIndex)
+        dismiss(animated: true)
+    }
+    
+    @IBAction func photoButtonTapped(_ sender: UIButton) {
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
+        
         let status = PHPhotoLibrary.authorizationStatus()
         
         switch status {
@@ -157,7 +134,7 @@ class AddDiaryViewController: UIViewController {
         }
     }
     
-    // 3. picker 실행 헬퍼 메서드
+    // MARK: - Helper
     private func presentPicker() {
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -166,30 +143,6 @@ class AddDiaryViewController: UIViewController {
         present(picker, animated: true)
     }
     
-    @objc func backButtonTapped() {
-        dismiss(animated: true)
-    }
-    
-    @objc func doneButtonTapped() {
-        guard let title = titleTextField.text?.trimmingCharacters(in: .whitespaces), !title.isEmpty else {
-            showAlert(message: "제목을 입력해주세요.")
-            return
-        }
-        
-        let content = contentTextView.textColor == .lightGray ? "" : contentTextView.text ?? ""
-        
-        let newDiary = DiaryEntry(
-            title: title,
-            content: content,
-            date: diary?.date ?? Date(),
-            photoImages: selectedImages
-        )
-        
-        delegate?.didAddDiary(newDiary, index: diaryIndex)
-        dismiss(animated: true)
-    }
-    
-    // MARK: - Helper
     private func showAlert(message: String) {
         let alert = UIAlertController(
             title: "입력 오류",
@@ -224,7 +177,6 @@ extension AddDiaryViewController: UIImagePickerControllerDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        // originalImage fallback 추가!
         let image = (info[.editedImage] as? UIImage) ?? (info[.originalImage] as? UIImage)
         
         guard let image = image else {
