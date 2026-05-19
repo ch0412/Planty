@@ -227,14 +227,17 @@ extension AddDiaryViewController: UIImagePickerControllerDelegate, UINavigationC
         // originalImage fallback 추가!
         let image = (info[.editedImage] as? UIImage) ?? (info[.originalImage] as? UIImage)
         
-        guard let image = image else { return }
+        guard let image = image else {
+            picker.dismiss(animated: true)
+            return
+        }
         selectedImages.append(image)
         photoCollectionView.reloadData()
-        dismiss(animated: true)
+        picker.dismiss(animated: true)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true)
+        picker.dismiss(animated: true)
     }
 }
 
