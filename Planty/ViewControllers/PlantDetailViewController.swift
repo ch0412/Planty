@@ -103,6 +103,7 @@ class PlantDetailViewController: UIViewController {
         if let image = plant.photoImage {
             plantImageView.image = image
         } else {
+            plantImageView.image = nil
             plantImageView.backgroundColor = .lightGray
         }
         
