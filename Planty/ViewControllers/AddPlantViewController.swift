@@ -199,21 +199,27 @@ extension AddPlantViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 // MARK: - UIImagePickerControllerDelegate
 extension AddPlantViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[.editedImage] as? UIImage {
-            selectedImage = image
-            
-            // photoView에 이미지 표시
-            let imageView = UIImageView(frame: photoView.bounds)
-            imageView.image = image
-            imageView.contentMode = .scaleAspectFill
-            imageView.clipsToBounds = true
-            imageView.layer.cornerRadius = 8
-            photoView.addSubview(imageView)
-        }
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        // 편집된 이미지 없으면 원본 이미지 사용
+        let image = (info[.editedImage] as? UIImage) ?? (info[.originalImage] as? UIImage)
+        
+        guard let image = image else { return }
+        selectedImage = image
+        
+        // 기존 imageView 제거 후 새로 추가
+        photoView.subviews.forEach { $0.removeFromSuperview() }
+        
+        let imageView = UIImageView(frame: photoView.bounds)
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
+        photoView.addSubview(imageView)
+        
         dismiss(animated: true)
     }
-    
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true)
     }
