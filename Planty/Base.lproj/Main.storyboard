@@ -68,45 +68,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wrt-G7-8Kv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4448" y="1"/>
-        </scene>
-        <!--Table View Controller-->
-        <scene sceneID="TEp-zO-ZC5">
-            <objects>
-                <tableViewController id="MoR-Bl-Bra" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="APm-j8-0CJ">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="jo3-je-BUZ">
-                                <rect key="frame" x="0.0" y="50" width="393" height="44.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jo3-je-BUZ" id="nMk-wU-J17">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="44.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="MoR-Bl-Bra" id="Sfl-d9-AXr"/>
-                            <outlet property="delegate" destination="MoR-Bl-Bra" id="Y3F-Hq-CHL"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zyG-iM-osc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5114" y="-32"/>
+            <point key="canvasLocation" x="5373.2824427480909" y="0.70422535211267612"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="pET-wd-xlu">
             <objects>
                 <viewController id="a4B-Cq-z7W" customClass="HomeViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="R62-5N-KVj">
+                    <view key="view" contentMode="scaleToFill" id="R62-5N-KVj">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4P-9O-piD" userLabel="Plus">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4P-9O-piD" userLabel="Plus">
                                 <rect key="frame" x="317" y="659" width="56" height="56"/>
                                 <color key="backgroundColor" red="0.83879565769999997" green="1" blue="0.61578721550000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -117,13 +89,14 @@
                                 <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
                                 <connections>
                                     <action selector="addPlantButtonTapped:" destination="a4B-Cq-z7W" eventType="touchUpInside" id="OoJ-v8-7by"/>
+                                    <segue destination="ueA-K1-UdL" kind="presentation" identifier="showAddPlant" id="1IG-CD-g1N"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4M5-W3-Dhz">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="735"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-5R-h0o" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="617"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-5R-h0o" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="573"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owI-rm-rlT" userLabel="Banner View">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="150"/>
@@ -286,6 +259,7 @@
                                                             <outlet property="dDayLabel" destination="i2i-Yv-N0d" id="oUd-cb-hiz"/>
                                                             <outlet property="nameLabel" destination="mdc-sd-Oex" id="aCF-CX-07f"/>
                                                             <outlet property="speciesLabel" destination="KYM-ar-dMe" id="Rbn-Vw-Mtd"/>
+                                                            <segue destination="o3G-lQ-c9D" kind="show" identifier="showPlantDetail" id="kQv-iT-OlE"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -343,14 +317,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nVB-Om-1b6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2214.5038167938928" y="-444.36619718309862"/>
+            <point key="canvasLocation" x="2175" y="-444"/>
         </scene>
-        <!--Add Plant View Controller-->
+        <!--새 식물 등록-->
         <scene sceneID="da4-Cr-NNq">
             <objects>
                 <viewController storyboardIdentifier="AddPlantVC" id="kWO-22-sOL" customClass="AddPlantViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wxs-Uj-Pa4">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="첫 모습을 기록해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXr-Zg-fpp" userLabel="Subtitle">
@@ -361,21 +335,38 @@
                             </label>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RJf-L3-bZs" userLabel="Photo View">
                                 <rect key="frame" x="20" y="161" width="353" height="180"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYC-02-doK">
+                                        <rect key="frame" x="154" y="74" width="47" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                                        <connections>
+                                            <action selector="photoButtonTapped:" destination="kWO-22-sOL" eventType="touchDown" id="X53-CP-b0e"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="SqB-r7-u9S"/>
                                     <constraint firstAttribute="height" constant="180" id="qVZ-YX-eNA"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="품종" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OLH-jq-wmm">
-                                <rect key="frame" x="20" y="365" width="353" height="44"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="품종" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OLH-jq-wmm">
+                                <rect key="frame" x="20" y="365" width="353" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ndn-Dp-e5W"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="시작 날짜" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fDp-pj-trl">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="시작 날짜" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fDp-pj-trl">
                                 <rect key="frame" x="20" y="485" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="PGs-KF-exv"/>
@@ -383,7 +374,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="관수주기" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vRD-2w-dqM">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="관수 주기" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vRD-2w-dqM">
                                 <rect key="frame" x="20" y="545" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="xHb-Fb-aqW"/>
@@ -391,7 +382,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="별명" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KVk-Lh-RIy">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="별명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KVk-Lh-RIy">
                                 <rect key="frame" x="20" y="425" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7iW-vE-43B"/>
@@ -421,8 +412,21 @@
                             <constraint firstItem="K3l-eL-5T1" firstAttribute="trailing" secondItem="OLH-jq-wmm" secondAttribute="trailing" constant="20" id="y38-FF-5QS"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="새 식물 등록" id="KaI-Jt-ckC">
+                        <barButtonItem key="leftBarButtonItem" title="취소" id="t6E-QH-ly2">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="kWO-22-sOL" id="Wd6-ta-6Th"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="등록" id="fsW-Ht-9lj">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="kWO-22-sOL" id="fZu-gO-Wen"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="nicknameTextField" destination="KVk-Lh-RIy" id="6J0-pn-D5p"/>
+                        <outlet property="photoButton" destination="EYC-02-doK" id="HXc-9R-t7R"/>
                         <outlet property="photoView" destination="RJf-L3-bZs" id="ecl-vF-Hn8"/>
                         <outlet property="speciesTextField" destination="OLH-jq-wmm" id="NWj-S5-vA5"/>
                         <outlet property="startDateTextField" destination="fDp-pj-trl" id="tS8-Mq-ljT"/>
@@ -431,7 +435,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QWf-AL-o5X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2990" y="-488"/>
+            <point key="canvasLocation" x="4075.5725190839694" y="-239.43661971830988"/>
         </scene>
         <!--Plant Detail View Controller-->
         <scene sceneID="GwL-zv-cRK">
@@ -466,7 +470,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gCn-58-HMa" userLabel="Diary Table View">
-                                <rect key="frame" x="0.0" y="328" width="393" height="456"/>
+                                <rect key="frame" x="0.0" y="328" width="393" height="407"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -488,6 +492,7 @@
                             <constraint firstItem="b8g-Vr-Uzm" firstAttribute="bottom" secondItem="gCn-58-HMa" secondAttribute="bottom" id="h07-cM-FV7"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="oaY-BK-XgN"/>
                     <connections>
                         <outlet property="dDayLabel" destination="C8J-4a-D03" id="HfP-8c-veO"/>
                         <outlet property="diaryTableView" destination="gCn-58-HMa" id="XyW-oU-Mi1"/>
@@ -498,7 +503,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IdE-2C-plC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3683.2061068702287" y="-115.49295774647888"/>
+            <point key="canvasLocation" x="3149" y="-911"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="9ig-uo-07r">
@@ -536,6 +541,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ICo-Pm-uJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1287.7862595419847" y="-444.36619718309862"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WnQ-OQ-SAV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ueA-K1-UdL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bqC-dI-RRs">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kWO-22-sOL" kind="relationship" relationship="rootViewController" id="TNU-IC-W86"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wLH-1v-XzX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3148.8549618320608" y="-239.43661971830988"/>
         </scene>
     </scenes>
     <resources>
