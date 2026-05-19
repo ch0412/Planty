@@ -60,15 +60,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Setup
     private func setupUI() {
-        view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.93, alpha: 1.0)
-        contentView.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.93, alpha: 1.0)
-        
-        bannerView.backgroundColor = .white
-        
-        plusButton.layer.cornerRadius = 28
-        plusButton.backgroundColor = UIColor(red: 0.4, green: 0.7, blue: 0.4, alpha: 1.0)
-        plusButton.setTitleColor(.white, for: .normal)
-        plusButton.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .light)
+        // 그림자만 코드로 처리 (스토리보드 불가)
         plusButton.layer.shadowColor = UIColor.black.cgColor
         plusButton.layer.shadowOpacity = 0.3
         plusButton.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -104,16 +96,12 @@ class HomeViewController: UIViewController {
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAddPlant" {
-            // AddPlantVC가 NavigationController에 embed 되어있는 경우
             if let nav = segue.destination as? UINavigationController,
                let vc = nav.topViewController as? AddPlantViewController {
                 vc.delegate = self
-            }
-            // AddPlantVC가 바로 연결된 경우
-            else if let vc = segue.destination as? AddPlantViewController {
+            } else if let vc = segue.destination as? AddPlantViewController {
                 vc.delegate = self
             }
-            
         } else if segue.identifier == "showPlantDetail" {
             if let vc = segue.destination as? PlantDetailViewController,
                let indexPath = sender as? IndexPath {

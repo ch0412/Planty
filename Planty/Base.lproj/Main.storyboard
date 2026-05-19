@@ -74,11 +74,11 @@
         <scene sceneID="pET-wd-xlu">
             <objects>
                 <viewController id="a4B-Cq-z7W" customClass="HomeViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="R62-5N-KVj">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="R62-5N-KVj">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4P-9O-piD" userLabel="Plus">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b4P-9O-piD" userLabel="Plus">
                                 <rect key="frame" x="317" y="659" width="56" height="56"/>
                                 <color key="backgroundColor" red="0.83879565769999997" green="1" blue="0.61578721550000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -86,7 +86,18 @@
                                     <constraint firstAttribute="height" constant="56" id="s3Z-20-Vbf"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
+                                <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system">
+                                    <backgroundConfiguration key="background">
+                                        <color key="backgroundColor" red="0.40000000000000002" green="0.70196078431372544" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </backgroundConfiguration>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="28"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="addPlantButtonTapped:" destination="a4B-Cq-z7W" eventType="touchUpInside" id="OoJ-v8-7by"/>
                                     <segue destination="ueA-K1-UdL" kind="presentation" identifier="showAddPlant" id="1IG-CD-g1N"/>
@@ -95,7 +106,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4M5-W3-Dhz">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="735"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-5R-h0o" userLabel="Content View">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-5R-h0o" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="573"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owI-rm-rlT" userLabel="Banner View">
@@ -265,7 +276,7 @@
                                                 </prototypes>
                                             </tableView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" red="0.98039215686274506" green="0.96078431372549022" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="eG4-8B-iXz" firstAttribute="leading" secondItem="RmU-5R-h0o" secondAttribute="leading" constant="20" id="6fi-ua-i7V"/>
                                             <constraint firstItem="hk5-6C-jjV" firstAttribute="leading" secondItem="RmU-5R-h0o" secondAttribute="leading" id="9LX-Vg-pWv"/>
@@ -290,7 +301,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DBA-tR-RZj"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.96078431372549022" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="DBA-tR-RZj" firstAttribute="trailing" secondItem="b4P-9O-piD" secondAttribute="trailing" constant="20" id="BE8-IR-T2q"/>
                             <constraint firstItem="4M5-W3-Dhz" firstAttribute="trailing" secondItem="DBA-tR-RZj" secondAttribute="trailing" id="LMm-7U-4d5"/>
