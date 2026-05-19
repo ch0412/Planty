@@ -142,8 +142,8 @@ class AddDiaryViewController: UIViewController {
     }
     
     @objc func doneButtonTapped() {
-        guard let title = titleTextField.text, !title.isEmpty else {
-            showAlert(message: "제목을 입력해주세요")
+        guard let title = titleTextField.text?.trimmingCharacters(in: .whitespaces), !title.isEmpty else {
+            showAlert(message: "제목을 입력해주세요.")
             return
         }
         
