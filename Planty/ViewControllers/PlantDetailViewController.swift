@@ -1,10 +1,3 @@
-//
-//  PlantDetailViewController.swift
-//  Planty
-//
-//  Created by choeun on 5/18/26.
-//
-
 import UIKit
 
 class PlantDetailViewController: UIViewController {
@@ -18,16 +11,14 @@ class PlantDetailViewController: UIViewController {
     
     // MARK: - Properties
     var plant: Plant?
-    
-    // 목업 데이터
     var diaries: [DiaryEntry] = [
         DiaryEntry(
-            title: "광합성 데이 - 26.04.30.",
+            title: "광합성 데이",
             content: "오늘도 베리베리의 상태는 좋다.\n물은 저번 주말에 주어 아직 촉촉한 상태고, 어제 못한 광합성도 충분히 했다.",
             date: Date()
         ),
         DiaryEntry(
-            title: "해가 없는 날 - 26.04.29.",
+            title: "해가 없는 날",
             content: "오늘 베리베리의 상태는 좋다.\n물은 충분하지만, 날이 흐려 광합성을 못한 점이 아쉽다. 내일은 해가 떴으면~",
             date: Calendar.current.date(byAdding: .day, value: -1, to: Date())!
         )
@@ -45,23 +36,16 @@ class PlantDetailViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.93, alpha: 1.0)
         
-        // 이미지뷰
         plantImageView.contentMode = .scaleAspectFill
         plantImageView.clipsToBounds = true
         plantImageView.backgroundColor = .lightGray
         
-        // 이름 레이블
         plantNameLabel.font = UIFont.boldSystemFont(ofSize: 28)
-        
-        // D+Day 레이블
         dDayLabel.font = UIFont.systemFont(ofSize: 16)
         dDayLabel.textColor = .darkGray
-        
-        // 품종 레이블
         speciesLabel.font = UIFont.systemFont(ofSize: 14)
         speciesLabel.textColor = .gray
         
-        // 테이블뷰
         diaryTableView.backgroundColor = .clear
         diaryTableView.separatorStyle = .none
         
@@ -90,13 +74,11 @@ class PlantDetailViewController: UIViewController {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            // 뒤로가기 버튼
             backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             backButton.widthAnchor.constraint(equalToConstant: 56),
             backButton.heightAnchor.constraint(equalToConstant: 56),
             
-            // 일기 추가 버튼
             addButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             addButton.widthAnchor.constraint(equalToConstant: 56),
@@ -107,7 +89,9 @@ class PlantDetailViewController: UIViewController {
     private func setupTableView() {
         diaryTableView.delegate = self
         diaryTableView.dataSource = self
-        diaryTableView.register(UITableViewCell.self, forCellReuseIdentifier: "DiaryCell")
+        diaryTableView.register(DiaryCell.self, forCellReuseIdentifier: "DiaryCell")
+        diaryTableView.separatorStyle = .none
+        diaryTableView.backgroundColor = .clear
     }
     
     private func configureData() {
@@ -116,7 +100,13 @@ class PlantDetailViewController: UIViewController {
         dDayLabel.text = "D + \(plant.dDay)"
         speciesLabel.text = "품종: \(plant.species)"
         
-        // 식물 일기가 있으면 사용
+        if let image = plant.photoImage {
+            plantImageView.image = image
+        } else {
+            plantImageView.image = nil
+            plantImageView.backgroundColor = .lightGray
+        }
+        
         if !plant.diaries.isEmpty {
             diaries = plant.diaries
         }
@@ -131,7 +121,16 @@ class PlantDetailViewController: UIViewController {
     }
     
     @objc func addDiaryButtonTapped() {
-        print("일기 추가")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(
+            withIdentifier: "AddDiaryVC"
+        ) as! AddDiaryViewController
+        
+        vc.delegate = self
+        
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .pageSheet
+        present(nav, animated: true)
     }
 }
 
@@ -143,28 +142,43 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DiaryCell", for: indexPath)
-        let diary = diaries[indexPath.row]
-        
-        cell.backgroundColor = .clear
-        cell.selectionStyle = .none
-        
-        // 셀 내용 구성
-        var content = cell.defaultContentConfiguration()
-        content.text = diary.title
-        content.secondaryText = diary.content
-        content.textProperties.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        content.secondaryTextProperties.font = UIFont.systemFont(ofSize: 14)
-        content.secondaryTextProperties.numberOfLines = 0
-        cell.contentConfiguration = content
-        
-        // 셀 배경
-        cell.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.93, alpha: 1.0)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DiaryCell", for: indexPath) as! DiaryCell
+        cell.configure(with: diaries[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    // 일지 클릭시 수정 화면으로
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(
+            withIdentifier: "AddDiaryVC"
+        ) as! AddDiaryViewController
+        
+        vc.delegate = self
+        vc.diary = diaries[indexPath.row]
+        vc.diaryIndex = indexPath.row
+        
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .pageSheet
+        present(nav, animated: true)
+    }
+}
+
+// MARK: - AddDiaryDelegate
+extension PlantDetailViewController: AddDiaryDelegate {
+    func didAddDiary(_ diary: DiaryEntry, index: Int?) {
+        if let index = index {
+            // 수정
+            diaries[index] = diary
+        } else {
+            // 새로 추가
+            diaries.insert(diary, at: 0)
+        }
+        plant?.diaries = diaries
+        diaryTableView.reloadData()
     }
 }

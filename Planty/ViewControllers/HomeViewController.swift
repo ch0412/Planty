@@ -42,16 +42,14 @@ class HomeViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.isHidden = true
+        
         setupUI()
         setupTableViews()
         configureData()
         
         view.bringSubviewToFront(plusButton)
-        
-        print("scrollView frame: \(scrollView.frame)")
-        print("contentView frame: \(contentView.frame)")
-        print("bannerView frame: \(bannerView.frame)")
-        print("view frame: \(view.frame)")
     }
     
     override func viewDidLayoutSubviews() {
@@ -155,6 +153,14 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             todoTableView.reloadRows(at: [indexPath], with: .automatic)
         } else {
             print("\(plants[indexPath.row].name) 선택됨")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(
+                withIdentifier: "PlantDetailVC"
+            ) as! PlantDetailViewController
+                    
+            vc.plant = plants[indexPath.row]
+                    
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
