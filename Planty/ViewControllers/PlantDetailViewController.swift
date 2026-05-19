@@ -178,6 +178,7 @@ extension PlantDetailViewController: AddDiaryDelegate {
             // 새로 추가
             diaries.insert(diary, at: 0)
         }
+        plant?.diaries = diaries
         diaryTableView.reloadData()
     }
 }
