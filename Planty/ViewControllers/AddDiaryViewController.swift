@@ -1,4 +1,5 @@
 import UIKit
+import Photos
 
 // MARK: - Delegate 프로토콜
 protocol AddDiaryDelegate: AnyObject {
@@ -130,6 +131,34 @@ class AddDiaryViewController: UIViewController {
     
     // MARK: - Actions
     @objc func photoButtonTapped() {
+        // 1. 소스 타입 확인
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+            return
+        }
+        
+        // 2. 권한 확인
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        switch status {
+        case .authorized, .limited:
+            presentPicker()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { [weak self] status in
+                DispatchQueue.main.async {
+                    if status == .authorized {
+                        self?.presentPicker()
+                    }
+                }
+            }
+        case .denied, .restricted:
+            showAlert(message: "설정에서 사진 접근 권한을 허용해주세요.")
+        default:
+            break
+        }
+    }
+    
+    // 3. picker 실행 헬퍼 메서드
+    private func presentPicker() {
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .photoLibrary
@@ -193,11 +222,14 @@ extension AddDiaryViewController: UITextViewDelegate {
 // MARK: - UIImagePickerControllerDelegate
 extension AddDiaryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[.editedImage] as? UIImage {
-            selectedImages.append(image) // ← 배열에 추가
-            photoCollectionView.reloadData()
-        }
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        // originalImage fallback 추가!
+        let image = (info[.editedImage] as? UIImage) ?? (info[.originalImage] as? UIImage)
+        
+        guard let image = image else { return }
+        selectedImages.append(image)
+        photoCollectionView.reloadData()
         dismiss(animated: true)
     }
     
