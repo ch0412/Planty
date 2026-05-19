@@ -119,6 +119,9 @@ class AddPlantViewController: UIViewController {
     // MARK: - Actions
     @objc func photoButtonTapped() {
         print("사진 추가")
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+            return
+        }
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .photoLibrary
