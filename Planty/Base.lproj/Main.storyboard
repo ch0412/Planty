@@ -121,7 +121,6 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="addPlantButtonTapped:" destination="a4B-Cq-z7W" eventType="touchUpInside" id="OoJ-v8-7by"/>
                                     <segue destination="ueA-K1-UdL" kind="presentation" identifier="showAddPlant" id="1IG-CD-g1N"/>
                                 </connections>
                             </button>
