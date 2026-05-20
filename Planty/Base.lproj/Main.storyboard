@@ -54,7 +54,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="photo.badge.plus" catalog="system"/>
                                 <connections>
-                                    <action selector="photoButtonTapped:" destination="NJm-sn-XyE" eventType="touchDown" id="YrS-ri-wUs"/>
+                                    <action selector="photoButtonTapped:" destination="NJm-sn-XyE" eventType="touchUpInside" id="VXI-Po-qii"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -375,7 +375,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
                                         <connections>
-                                            <action selector="photoButtonTapped:" destination="kWO-22-sOL" eventType="touchDown" id="X53-CP-b0e"/>
+                                            <action selector="photoButtonTapped:" destination="kWO-22-sOL" eventType="touchUpInside" id="Dvk-tH-3sJ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -445,15 +445,15 @@
                             <constraint firstItem="K3l-eL-5T1" firstAttribute="trailing" secondItem="OLH-jq-wmm" secondAttribute="trailing" constant="20" id="y38-FF-5QS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="새 식물 등록" id="KaI-Jt-ckC">
-                        <barButtonItem key="leftBarButtonItem" title="취소" id="t6E-QH-ly2">
+                    <navigationItem key="navigationItem" title="새 식물 등록" id="Yt4-k7-FIm" userLabel="Navigation Bar">
+                        <barButtonItem key="leftBarButtonItem" title="취소" id="O2j-aM-NE4">
                             <connections>
-                                <action selector="cancelButtonTapped:" destination="kWO-22-sOL" id="Wd6-ta-6Th"/>
+                                <action selector="cancelButtonTapped:" destination="kWO-22-sOL" id="BM8-dy-03E"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="등록" id="fsW-Ht-9lj">
+                        <barButtonItem key="rightBarButtonItem" title="등록" id="TVY-lt-aMp">
                             <connections>
-                                <action selector="saveButtonTapped:" destination="kWO-22-sOL" id="fZu-gO-Wen"/>
+                                <action selector="saveButtonTapped:" destination="kWO-22-sOL" id="Fft-OY-OEs"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -524,7 +524,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="addDiaryButtonTapped:" destination="o3G-lQ-c9D" eventType="touchDown" id="IZt-7u-C3E"/>
+                                    <action selector="addDiaryButtonTapped:" destination="o3G-lQ-c9D" eventType="touchUpInside" id="lLL-AK-lAK"/>
                                     <segue destination="41C-8c-A2U" kind="presentation" identifier="showAddDiary" id="axe-FI-5FX"/>
                                 </connections>
                             </button>
