@@ -224,7 +224,10 @@ extension AddPlantViewController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         let image = (info[.editedImage] as? UIImage) ?? (info[.originalImage] as? UIImage)
-        guard let image = image else { return }
+        guard let image = image else {
+            dismiss(animated: true)
+            return
+        }
         selectedImage = image
         
         // 기존 뷰 제거 후 선택한 이미지 표시

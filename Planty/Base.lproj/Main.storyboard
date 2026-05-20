@@ -351,10 +351,10 @@
             </objects>
             <point key="canvasLocation" x="2156" y="-544"/>
         </scene>
-        <!--새 식물 등록-->
+        <!--Add Plant View Controller-->
         <scene sceneID="da4-Cr-NNq">
             <objects>
-                <viewController storyboardIdentifier="AddPlantVC" id="kWO-22-sOL" customClass="AddPlantViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddPlantVC" id="kWO-22-sOL" userLabel="Add Plant View Controller" customClass="AddPlantViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wxs-Uj-Pa4">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
