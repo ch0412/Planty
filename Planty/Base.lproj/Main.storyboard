@@ -359,18 +359,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="첫 모습을 기록해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXr-Zg-fpp" userLabel="Subtitle">
-                                <rect key="frame" x="20" y="136" width="119" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="첫 모습을 기록해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXr-Zg-fpp" userLabel="Subtitle">
+                                <rect key="frame" x="20" y="136" width="119" height="19.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RJf-L3-bZs" userLabel="Photo View">
-                                <rect key="frame" x="20" y="161" width="353" height="180"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJf-L3-bZs" userLabel="Photo View">
+                                <rect key="frame" x="20" y="165.33333333333337" width="353" height="230"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYC-02-doK">
-                                        <rect key="frame" x="154" y="74" width="47" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYC-02-doK">
+                                        <rect key="frame" x="146.66666666666666" y="85" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="FQb-Y4-d2y"/>
+                                            <constraint firstAttribute="height" constant="60" id="FUW-hZ-wmN"/>
+                                        </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
                                         <connections>
@@ -380,8 +383,9 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="SqB-r7-u9S"/>
-                                    <constraint firstAttribute="height" constant="180" id="qVZ-YX-eNA"/>
+                                    <constraint firstItem="EYC-02-doK" firstAttribute="centerX" secondItem="RJf-L3-bZs" secondAttribute="centerX" id="eqk-6J-HoZ"/>
+                                    <constraint firstAttribute="height" constant="230" id="qVZ-YX-eNA"/>
+                                    <constraint firstItem="EYC-02-doK" firstAttribute="centerY" secondItem="RJf-L3-bZs" secondAttribute="centerY" id="wmw-Z0-dgV"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -390,36 +394,36 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="품종" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OLH-jq-wmm">
-                                <rect key="frame" x="20" y="365" width="353" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="품종" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OLH-jq-wmm">
+                                <rect key="frame" x="20" y="435.33333333333331" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ndn-Dp-e5W"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="시작 날짜" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fDp-pj-trl">
-                                <rect key="frame" x="20" y="485" width="353" height="44"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="시작 날짜" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fDp-pj-trl">
+                                <rect key="frame" x="20" y="563.33333333333337" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="PGs-KF-exv"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="관수 주기" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vRD-2w-dqM">
-                                <rect key="frame" x="20" y="545" width="353" height="44"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="관수 주기" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vRD-2w-dqM">
+                                <rect key="frame" x="20" y="627.33333333333337" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="xHb-Fb-aqW"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="별명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KVk-Lh-RIy">
-                                <rect key="frame" x="20" y="425" width="353" height="44"/>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="별명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KVk-Lh-RIy">
+                                <rect key="frame" x="20" y="499.33333333333326" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7iW-vE-43B"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
@@ -429,18 +433,19 @@
                             <constraint firstItem="fDp-pj-trl" firstAttribute="leading" secondItem="K3l-eL-5T1" secondAttribute="leading" constant="20" id="0Cs-Gn-X3r"/>
                             <constraint firstItem="RJf-L3-bZs" firstAttribute="leading" secondItem="K3l-eL-5T1" secondAttribute="leading" constant="20" id="3ki-lD-ibW"/>
                             <constraint firstItem="K3l-eL-5T1" firstAttribute="trailing" secondItem="RJf-L3-bZs" secondAttribute="trailing" constant="20" id="6Og-7q-lfm"/>
-                            <constraint firstItem="RJf-L3-bZs" firstAttribute="top" secondItem="qXr-Zg-fpp" secondAttribute="bottom" constant="8" id="9bx-7x-bNa"/>
+                            <constraint firstItem="RJf-L3-bZs" firstAttribute="top" secondItem="qXr-Zg-fpp" secondAttribute="bottom" constant="10" id="9bx-7x-bNa"/>
                             <constraint firstItem="K3l-eL-5T1" firstAttribute="trailing" secondItem="fDp-pj-trl" secondAttribute="trailing" constant="20" id="Fa0-q7-q3E"/>
                             <constraint firstItem="KVk-Lh-RIy" firstAttribute="leading" secondItem="K3l-eL-5T1" secondAttribute="leading" constant="20" id="LnI-lD-zgf"/>
-                            <constraint firstItem="fDp-pj-trl" firstAttribute="top" secondItem="KVk-Lh-RIy" secondAttribute="bottom" constant="16" id="SrU-G8-xge"/>
+                            <constraint firstItem="fDp-pj-trl" firstAttribute="top" secondItem="KVk-Lh-RIy" secondAttribute="bottom" constant="20" id="SrU-G8-xge"/>
                             <constraint firstItem="OLH-jq-wmm" firstAttribute="leading" secondItem="K3l-eL-5T1" secondAttribute="leading" constant="20" id="VBq-4r-TeN"/>
+                            <constraint firstItem="qXr-Zg-fpp" firstAttribute="top" secondItem="K3l-eL-5T1" secondAttribute="top" constant="80" id="VLf-d2-8bR"/>
                             <constraint firstItem="qXr-Zg-fpp" firstAttribute="leading" secondItem="K3l-eL-5T1" secondAttribute="leading" constant="20" id="VYG-K4-E5l"/>
                             <constraint firstItem="K3l-eL-5T1" firstAttribute="trailing" secondItem="vRD-2w-dqM" secondAttribute="trailing" constant="20" id="aBT-QR-hcm"/>
                             <constraint firstItem="vRD-2w-dqM" firstAttribute="leading" secondItem="K3l-eL-5T1" secondAttribute="leading" constant="20" id="kB9-2r-b3A"/>
-                            <constraint firstItem="vRD-2w-dqM" firstAttribute="top" secondItem="fDp-pj-trl" secondAttribute="bottom" constant="16" id="ko0-mB-G1N"/>
-                            <constraint firstItem="KVk-Lh-RIy" firstAttribute="top" secondItem="OLH-jq-wmm" secondAttribute="bottom" constant="16" id="nBY-u7-bdy"/>
+                            <constraint firstItem="vRD-2w-dqM" firstAttribute="top" secondItem="fDp-pj-trl" secondAttribute="bottom" constant="20" id="ko0-mB-G1N"/>
+                            <constraint firstItem="KVk-Lh-RIy" firstAttribute="top" secondItem="OLH-jq-wmm" secondAttribute="bottom" constant="20" id="nBY-u7-bdy"/>
                             <constraint firstItem="K3l-eL-5T1" firstAttribute="trailing" secondItem="KVk-Lh-RIy" secondAttribute="trailing" constant="20" id="oWV-oj-e9I"/>
-                            <constraint firstItem="OLH-jq-wmm" firstAttribute="top" secondItem="RJf-L3-bZs" secondAttribute="bottom" constant="24" id="onW-KO-ilD"/>
+                            <constraint firstItem="OLH-jq-wmm" firstAttribute="top" secondItem="RJf-L3-bZs" secondAttribute="bottom" constant="40" id="onW-KO-ilD"/>
                             <constraint firstItem="K3l-eL-5T1" firstAttribute="trailing" secondItem="OLH-jq-wmm" secondAttribute="trailing" constant="20" id="y38-FF-5QS"/>
                         </constraints>
                     </view>
