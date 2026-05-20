@@ -54,51 +54,33 @@ class HomeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        // 테이블뷰 높이 동적 업데이트
         todoTableHeightConstraint.constant = CGFloat(todoItems.count) * 50
         plantTableHeightConstraint.constant = CGFloat(plants.count) * 106
-        
-        print("bannerView frame after layout: \(bannerView.frame)")
     }
     
     // MARK: - Setup
     private func setupUI() {
-        // 배경색 (크림)
-        view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.93, alpha: 1.0)
-        contentView.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.93, alpha: 1.0)
-        
-        // 배너 스타일
-        bannerView.backgroundColor = .white
-        
-        // 플로팅 버튼 스타일
-            plusButton.layer.cornerRadius = 28
-            plusButton.backgroundColor = UIColor(red: 0.4, green: 0.7, blue: 0.4, alpha: 1.0)
-            plusButton.setTitleColor(.white, for: .normal)
-            plusButton.titleLabel?.font = UIFont.systemFont(ofSize: 28, weight: .light)
-            plusButton.layer.shadowColor = UIColor.black.cgColor
-            plusButton.layer.shadowOpacity = 0.3
-            plusButton.layer.shadowOffset = CGSize(width: 0, height: 4)
-            plusButton.layer.shadowRadius = 8
+        // 그림자만 코드로 처리 (스토리보드 불가)
+        plusButton.layer.shadowColor = UIColor.black.cgColor
+        plusButton.layer.shadowOpacity = 0.3
+        plusButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        plusButton.layer.shadowRadius = 8
     }
     
     private func setupTableViews() {
         todoTableView.delegate = self
         todoTableView.dataSource = self
-        //todoTableView.register(UINib(nibName: "TodoCell", bundle: nil), forCellReuseIdentifier: "TodoCell")
         
         plantTableView.delegate = self
         plantTableView.dataSource = self
-        //plantTableView.register(UINib(nibName: "PlantCell", bundle: nil), forCellReuseIdentifier: "PlantCell")
     }
     
     private func configureData() {
-        // 날짜
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.dateFormat = "M월 d일 (E)"
         dateLabel.text = formatter.string(from: Date())
         
-        // 정원 타이틀
         gardenTitleLabel.text = "\(userName)님의 정원 (\(plants.count)개)"
     }
     
@@ -107,18 +89,21 @@ class HomeViewController: UIViewController {
         print("설정 버튼 탭")
     }
     
-    @IBAction func addPlantButtonTapped(_ sender: UIButton) {
-        print("식물 추가 버튼 탭")
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(
-            withIdentifier: "AddPlantVC"
-        ) as! AddPlantViewController
-            
-        vc.delegate = self  // delegate 연결
-            
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .pageSheet
-        present(nav, animated: true)
+    // MARK: - Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAddPlant" {
+            if let nav = segue.destination as? UINavigationController,
+               let vc = nav.topViewController as? AddPlantViewController {
+                vc.delegate = self
+            } else if let vc = segue.destination as? AddPlantViewController {
+                vc.delegate = self
+            }
+        } else if segue.identifier == "showPlantDetail" {
+            if let vc = segue.destination as? PlantDetailViewController,
+               let indexPath = sender as? IndexPath {
+                vc.plant = plants[indexPath.row]
+            }
+        }
     }
 }
 
@@ -153,14 +138,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             todoTableView.reloadRows(at: [indexPath], with: .automatic)
         } else {
             print("\(plants[indexPath.row].name) 선택됨")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(
-                withIdentifier: "PlantDetailVC"
-            ) as! PlantDetailViewController
-                    
-            vc.plant = plants[indexPath.row]
-                    
-            navigationController?.pushViewController(vc, animated: true)
+            performSegue(withIdentifier: "showPlantDetail", sender: indexPath)
         }
     }
     
@@ -176,16 +154,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: - AddPlantDelegate
 extension HomeViewController: AddPlantDelegate {
     func didAddPlant(_ plant: Plant) {
-        // 배열에 추가
         plants.append(plant)
-        
-        // 타이틀 업데이트
         gardenTitleLabel.text = "\(userName)님의 정원 (\(plants.count)개)"
-        
-        // 테이블뷰 높이 업데이트
         plantTableHeightConstraint.constant = CGFloat(plants.count) * 106
-        
-        // 테이블뷰 리로드
         plantTableView.reloadData()
     }
 }
