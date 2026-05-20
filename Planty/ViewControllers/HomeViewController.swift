@@ -89,10 +89,6 @@ class HomeViewController: UIViewController {
         print("설정 버튼 탭")
     }
     
-    @IBAction func addPlantButtonTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "showAddPlant", sender: nil)
-    }
-    
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAddPlant" {
