@@ -68,10 +68,6 @@ class PlantDetailViewController: UIViewController {
         diaryTableView.reloadData()
     }
     
-    @IBAction func addDiaryButtonTapped(_ sender: UIButton) {
-        performSegue(withIdentifier: "showAddDiary", sender: nil)
-    }
-    
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAddDiary" {
