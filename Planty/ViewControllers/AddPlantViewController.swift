@@ -29,13 +29,21 @@ class AddPlantViewController: UIViewController {
     var selectedWaterCycle: Int = 3
     let waterCycleOptions = [1, 2, 3, 5, 7, 10, 14, 21, 30]
     var selectedImage: UIImage?
+    private var dashBorderAdded = false
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDashBorder()       // 점선 테두리 (스토리보드 불가)
         setupDatePicker()
         setupWaterCyclePicker()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !dashBorderAdded {
+            setupDashBorder()
+            dashBorderAdded = true
+        }
     }
     
     // MARK: - Setup
