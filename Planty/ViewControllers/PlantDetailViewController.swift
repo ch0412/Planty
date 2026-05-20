@@ -80,6 +80,14 @@ class PlantDetailViewController: UIViewController {
                     vc.diaryIndex = indexPath.row
                 }
             }
+            
+            else if let vc = segue.destination as? AddDiaryViewController {
+                vc.delegate = self
+                if let indexPath = sender as? IndexPath {
+                    vc.diary = diaries[indexPath.row]
+                    vc.diaryIndex = indexPath.row
+                }
+            }
         }
     }
 }
