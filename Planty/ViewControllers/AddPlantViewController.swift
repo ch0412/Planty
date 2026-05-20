@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 // MARK: - Delegate 프로토콜
 protocol AddPlantDelegate: AnyObject {
@@ -102,11 +103,25 @@ class AddPlantViewController: UIViewController {
         guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
             return
         }
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
-        present(picker, animated: true)
+        
+        let status = PHPhotoLibrary.authorizationStatus()
+        
+        switch status {
+        case .authorized, .limited:
+            presentPicker()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { [weak self] status in
+                DispatchQueue.main.async {
+                    if status == .authorized {
+                        self?.presentPicker()
+                    }
+                }
+            }
+        case .denied, .restricted:
+            showAlert(message: "설정에서 사진 접근 권한을 허용해주세요.")
+        default:
+            break
+        }
     }
     
     // MARK: - Actions
@@ -127,6 +142,14 @@ class AddPlantViewController: UIViewController {
         )
         alert.addAction(UIAlertAction(title: "확인", style: .default))
         present(alert, animated: true)
+    }
+    
+    private func presentPicker() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        present(picker, animated: true)
     }
 }
 
