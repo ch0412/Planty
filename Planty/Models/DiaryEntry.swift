@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct DiaryEntry {
-    let id: UUID
+    var id: UUID
     var title: String
     var content: String
     var date: Date

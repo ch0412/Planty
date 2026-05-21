@@ -8,22 +8,11 @@ class PlantDetailViewController: UIViewController {
     @IBOutlet weak var dDayLabel: UILabel!
     @IBOutlet weak var speciesLabel: UILabel!
     @IBOutlet weak var diaryTableView: UITableView!
-    @IBOutlet weak var addButton: UIButton!    // ✅ 추가
+    @IBOutlet weak var addButton: UIButton!
     
     // MARK: - Properties
     var plant: Plant?
-    var diaries: [DiaryEntry] = [
-        DiaryEntry(
-            title: "광합성 데이",
-            content: "오늘도 베리베리의 상태는 좋다.\n물은 저번 주말에 주어 아직 촉촉한 상태고, 어제 못한 광합성도 충분히 했다.",
-            date: Date()
-        ),
-        DiaryEntry(
-            title: "해가 없는 날",
-            content: "오늘 베리베리의 상태는 좋다.\n물은 충분하지만, 날이 흐려 광합성을 못한 점이 아쉽다. 내일은 해가 떴으면~",
-            date: Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-        )
-    ]
+    var diaries: [DiaryEntry] = []
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -61,10 +50,7 @@ class PlantDetailViewController: UIViewController {
             plantImageView.backgroundColor = .lightGray
         }
         
-        if !plant.diaries.isEmpty {
-            diaries = plant.diaries
-        }
-        
+        diaries = plant.diaries
         diaryTableView.reloadData()
     }
     
@@ -74,14 +60,11 @@ class PlantDetailViewController: UIViewController {
             if let nav = segue.destination as? UINavigationController,
                let vc = nav.topViewController as? AddDiaryViewController {
                 vc.delegate = self
-                // 수정 모드인 경우
                 if let indexPath = sender as? IndexPath {
                     vc.diary = diaries[indexPath.row]
                     vc.diaryIndex = indexPath.row
                 }
-            }
-            
-            else if let vc = segue.destination as? AddDiaryViewController {
+            } else if let vc = segue.destination as? AddDiaryViewController {
                 vc.delegate = self
                 if let indexPath = sender as? IndexPath {
                     vc.diary = diaries[indexPath.row]
@@ -117,12 +100,24 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
 // MARK: - AddDiaryDelegate
 extension PlantDetailViewController: AddDiaryDelegate {
     func didAddDiary(_ diary: DiaryEntry, index: Int?) {
+        guard let plant = plant else { return }
+        
         if let index = index {
+            // 일지 수정
             diaries[index] = diary
+            CoreDataManager.shared.updateDiary(diary, for: plant)
         } else {
+            // 일지 추가
             diaries.insert(diary, at: 0)
+            CoreDataManager.shared.createDiary(diary, for: plant)
         }
-        plant?.diaries = diaries
+        
+        // plant 업데이트
+        self.plant?.diaries = diaries
+        
+        // CoreData plant 업데이트
+        CoreDataManager.shared.updatePlant(self.plant!)
+        
         diaryTableView.reloadData()
     }
 }

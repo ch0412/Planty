@@ -30,14 +30,9 @@ class HomeViewController: UIViewController {
         TodoItem(title: "카스테라 창가로 옮기기", isCompleted: false)
     ]
     
-    var plants: [Plant] = [
-        Plant(name: "베리베리", species: "산세베리아",
-              startDate: Calendar.current.date(byAdding: .day, value: -155, to: Date())!),
-        Plant(name: "카스테라", species: "몬스테라",
-              startDate: Calendar.current.date(byAdding: .day, value: -32, to: Date())!)
-    ]
-    
+    var plants: [Plant] = []
     let userName = "OO"
+    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -50,6 +45,11 @@ class HomeViewController: UIViewController {
         configureData()
         
         view.bringSubviewToFront(plusButton)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadPlants()
     }
     
     override func viewDidLayoutSubviews() {
@@ -82,6 +82,14 @@ class HomeViewController: UIViewController {
         dateLabel.text = formatter.string(from: Date())
         
         gardenTitleLabel.text = "\(userName)님의 정원 (\(plants.count)개)"
+    }
+    
+    // MARK: - CoreData
+    private func loadPlants() {
+        plants = CoreDataManager.shared.fetchPlants()
+        gardenTitleLabel.text = "\(userName)님의 정원 (\(plants.count)개)"
+        plantTableHeightConstraint.constant = CGFloat(plants.count) * 106
+        plantTableView.reloadData()
     }
     
     // MARK: - IBActions
@@ -151,12 +159,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-// MARK: - AddPlantDelegate
 extension HomeViewController: AddPlantDelegate {
     func didAddPlant(_ plant: Plant) {
-        plants.append(plant)
-        gardenTitleLabel.text = "\(userName)님의 정원 (\(plants.count)개)"
-        plantTableHeightConstraint.constant = CGFloat(plants.count) * 106
-        plantTableView.reloadData()
+        CoreDataManager.shared.createPlant(plant)
+        loadPlants()
     }
 }

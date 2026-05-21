@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 
 struct Plant {
-    let id: UUID
+    var id: UUID
     var name: String
     var species: String
     var startDate: Date
