@@ -260,7 +260,7 @@ class CoreDataManager {
         // 사진 복원
         if let photosData = object.value(forKey: "photos") as? Data,
            let dataArray = try? NSKeyedUnarchiver.unarchivedObject(
-               ofClass: NSArray.self,
+            ofClasses: [NSArray.self, NSData.self],
                from: photosData
            ) as? [Data] {
             diary.photoImages = dataArray.compactMap { UIImage(data: $0) }
