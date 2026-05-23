@@ -30,13 +30,16 @@ class CoreDataManager {
     }
     
     // MARK: - Save
-    func saveContext() {
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                print("저장 실패: \(error)")
-            }
+    @discardableResult
+    func saveContext() -> Bool {
+        guard context.hasChanges else { return true }
+        
+        do {
+            try context.save()
+            return true
+        } catch {
+            print("저장 실패: \(error)")
+            return false
         }
     }
     
