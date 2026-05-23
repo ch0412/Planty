@@ -92,6 +92,8 @@ class CoreDataManager {
                 if let image = plant.photoImage,
                    let data = image.jpegData(compressionQuality: 0.8) {
                     entity.setValue(data, forKey: "photo")
+                } else {
+                    entity.setValue(nil, forKey: "photo")
                 }
                 saveContext()
             }
@@ -177,6 +179,8 @@ class CoreDataManager {
                         requiringSecureCoding: false
                     )
                     entity.setValue(archivedData, forKey: "photos")
+                } else {
+                    entity.setValue(nil, forKey: "photos")
                 }
                 saveContext()
             }
