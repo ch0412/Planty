@@ -112,6 +112,8 @@ extension PlantDetailViewController: AddDiaryDelegate {
             CoreDataManager.shared.createDiary(diary, for: plant)
         }
         
+        diaries.sort { $0.date > $1.date }
+        
         // plant 업데이트
         self.plant?.diaries = diaries
         
