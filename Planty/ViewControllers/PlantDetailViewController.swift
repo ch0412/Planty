@@ -17,24 +17,14 @@ class PlantDetailViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         setupTableView()
         configureData()
-    }
-    
-    // MARK: - Setup
-    private func setupUI() {
-        // 버튼 cornerRadius만 코드로 처리
-        addButton.layer.cornerRadius = 28
-        addButton.layer.masksToBounds = true
     }
     
     private func setupTableView() {
         diaryTableView.delegate = self
         diaryTableView.dataSource = self
         diaryTableView.register(DiaryCell.self, forCellReuseIdentifier: "DiaryCell")
-        diaryTableView.separatorStyle = .none
-        diaryTableView.backgroundColor = .clear
     }
     
     private func configureData() {
