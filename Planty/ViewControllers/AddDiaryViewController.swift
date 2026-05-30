@@ -1,5 +1,6 @@
 import UIKit
 import Photos
+import PhotosUI
 
 // MARK: - Delegate 프로토콜
 protocol AddDiaryDelegate: AnyObject {
@@ -113,10 +114,16 @@ class AddDiaryViewController: UIViewController {
     
     // MARK: - Helper
     private func presentPicker() {
-        let picker = UIImagePickerController()
+        // 1. 피커 설정 (다중 선택 및 사진만 필터링)
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 5  // 🌟 최대 선택 장수 제한 (0으로 두면 무제한!)
+        configuration.filter = .images    // 동영상 제외, 사진만 보이도록 필터링
+                
+        // 2. 피커 생성 및 대리자(Delegate) 임명
+        let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
-        picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
+                
+        // 3. 화면에 띄우기
         present(picker, animated: true)
     }
     
@@ -149,24 +156,42 @@ extension AddDiaryViewController: UITextViewDelegate {
     }
 }
 
-// MARK: - UIImagePickerControllerDelegate
-extension AddDiaryViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+// MARK: - PHPickerViewControllerDelegate (다중 선택 완료 처리)
+extension AddDiaryViewController: PHPickerViewControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        let image = (info[.editedImage] as? UIImage) ?? (info[.originalImage] as? UIImage)
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        // 피커 창 닫기
+        picker.dismiss(animated: true)
         
-        guard let image = image else {
-            picker.dismiss(animated: true)
-            return
+        // 유저가 사진을 고르지 않고 취소를 눌렀다면 바로 리턴
+        guard !results.isEmpty else { return }
+        
+        // 비동기로 사진을 로드하기 위한 디스패치 그룹 생성 (여러 장이 다 완료될 때까지 기다리는 역할)
+        let group = DispatchGroup()
+        
+        for result in results {
+            let itemProvider = result.itemProvider
+            
+            // 객체가 UIImage로 로드가 가능한지 검증
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                group.enter() // 작업 시작 알림
+                
+                itemProvider.loadObject(ofClass: UIImage.self) { [weak self] (image, error) in
+                    if let image = image as? UIImage {
+                        // UI 업데이트는 반드시 메인 스레드에서!
+                        DispatchQueue.main.async {
+                            self?.selectedImages.append(image)
+                        }
+                    }
+                    group.leave() // 작업 완료 알림
+                }
+            }
         }
-        selectedImages.append(image)
-        photoCollectionView.reloadData()
-        picker.dismiss(animated: true)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true)
+        
+        // 🌟 모든 사진이 다 selectedImages 리스트에 추가 완료되었다면 컬렉션뷰 새로고침!
+        group.notify(queue: .main) { [weak self] in
+            self?.photoCollectionView.reloadData()
+        }
     }
 }
 
