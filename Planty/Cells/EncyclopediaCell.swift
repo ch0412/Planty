@@ -22,8 +22,6 @@ class EncyclopediaCell: UICollectionViewCell {
             // 에셋에 실제 이미지가 없을 때 들어오는 기본 잎새 아이콘 설정
             plantImageView.image = UIImage(systemName: "leaf.fill")
             plantImageView.contentMode = .center
-            plantImageView.tintColor = UIColor(red: 0.3, green: 0.6, blue: 0.3, alpha: 1.0)
-            plantImageView.backgroundColor = UIColor(red: 0.95, green: 0.93, blue: 0.9, alpha: 1.0)
         }
     }
     

@@ -22,7 +22,6 @@ class EncyclopediaViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchBar()
-        setupCollectionView()
     }
     
     private func setupSearchBar() {
@@ -35,11 +34,6 @@ class EncyclopediaViewController: UIViewController {
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-    }
-    
-    private func setupCollectionView() {
-        collectionView.delegate = self
-        collectionView.dataSource = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
