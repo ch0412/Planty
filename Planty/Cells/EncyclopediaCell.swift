@@ -18,7 +18,6 @@ class EncyclopediaCell: UICollectionViewCell {
         
         if let image = UIImage(named: plant.imageName) {
             plantImageView.image = image
-            plantImageView.contentMode = .scaleAspectFill
         } else {
             // 에셋에 실제 이미지가 없을 때 들어오는 기본 잎새 아이콘 설정
             plantImageView.image = UIImage(systemName: "leaf.fill")
