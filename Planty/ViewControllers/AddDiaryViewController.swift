@@ -25,13 +25,6 @@ class AddDiaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        setupTitleLine()
-        
-        // 스토리보드에서 가져온 컬렉션뷰의 대리자 임명
-        photoCollectionView.delegate = self
-        photoCollectionView.dataSource = self
-        contentTextView.delegate = self
-        
         loadExistingDiary()
     }
     
@@ -41,19 +34,6 @@ class AddDiaryViewController: UIViewController {
         title = diary == nil ? "일지 작성" : "일지 수정"
     }
     
-    private func setupTitleLine() {
-        // 텍스트 필드 밑 언더라인 가이드 주입
-        let titleLine = UIView()
-        titleLine.backgroundColor = .lightGray
-        titleLine.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(titleLine)
-        NSLayoutConstraint.activate([
-            titleLine.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 4),
-            titleLine.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLine.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            titleLine.heightAnchor.constraint(equalToConstant: 0.5)
-        ])
-    }
     
     private func loadExistingDiary() {
         guard let diary = diary else { return }

@@ -25,6 +25,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fnb-bM-GEZ">
+                                <rect key="frame" x="20" y="204" width="353" height="0.66666666666665719"/>
+                                <color key="backgroundColor" name="separatorColor" catalog="System" colorSpace="catalog"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="qZN-r1-BVe"/>
+                                </constraints>
+                            </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="오늘의 일지 작성..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v4x-0D-g1x" userLabel="Content">
                                 <rect key="frame" x="20" y="216" width="353" height="587"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -57,6 +64,10 @@
                                         </collectionViewCellContentView>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="NJm-sn-XyE" id="FrJ-3e-SPK"/>
+                                    <outlet property="delegate" destination="NJm-sn-XyE" id="5aj-Iq-osQ"/>
+                                </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uES-07-fLf" userLabel="Photo Button">
                                 <rect key="frame" x="308.33333333333331" y="678.66666666666663" width="54.666666666666686" height="34.333333333333371"/>
@@ -77,11 +88,14 @@
                             <constraint firstItem="5ha-Ly-0ca" firstAttribute="leading" secondItem="4uJ-4w-jyv" secondAttribute="leading" id="AEl-99-KJU"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="trailing" secondItem="v4x-0D-g1x" secondAttribute="trailing" constant="20" id="EeG-j6-NpI"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="trailing" secondItem="V8A-8C-cpH" secondAttribute="trailing" constant="30" id="MN0-fD-feA"/>
+                            <constraint firstItem="Fnb-bM-GEZ" firstAttribute="leading" secondItem="4uJ-4w-jyv" secondAttribute="leading" constant="20" id="VLi-Z7-CD5"/>
                             <constraint firstItem="V8A-8C-cpH" firstAttribute="top" secondItem="4uJ-4w-jyv" secondAttribute="top" constant="100" id="XA3-U6-GEn"/>
                             <constraint firstItem="V8A-8C-cpH" firstAttribute="leading" secondItem="4uJ-4w-jyv" secondAttribute="leading" constant="30" id="blD-MU-Gk1"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="bottom" secondItem="uES-07-fLf" secondAttribute="bottom" constant="70" id="cFK-4c-aBx"/>
+                            <constraint firstItem="Fnb-bM-GEZ" firstAttribute="top" secondItem="V8A-8C-cpH" secondAttribute="bottom" constant="4" id="ci6-qu-RX4"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="trailing" secondItem="uES-07-fLf" secondAttribute="trailing" constant="30" id="eV9-Cq-z0B"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="bottom" secondItem="5ha-Ly-0ca" secondAttribute="bottom" constant="140" id="pFj-eQ-zg8"/>
+                            <constraint firstItem="4uJ-4w-jyv" firstAttribute="trailing" secondItem="Fnb-bM-GEZ" secondAttribute="trailing" constant="20" id="vRC-zf-xgp"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="bottom" secondItem="v4x-0D-g1x" secondAttribute="bottom" constant="-20" id="wSM-K5-T6g"/>
                         </constraints>
                     </view>
