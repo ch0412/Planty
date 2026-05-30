@@ -40,23 +40,6 @@ class EncyclopediaViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        // 💡 스토리보드에 설정된 레이아웃을 가져와서 '기기별 셀 크기'만 실시간으로 안전하게 재계산합니다.
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let padding: CGFloat = 16  // 화면 좌우 여백
-            let spacing: CGFloat = 16  // 셀과 셀 사이의 가로/세로 공백
-            
-            // (현재 구동 중인 아이폰 화면 너비 - 양옆 여백 - 가운데 공백) / 2 = 정확한 2열 너비
-            let width = (view.frame.width - (padding * 2) - spacing) / 2
-            
-            // 시안 기반의 예쁜 가로세로 비율 (세로가 살짝 더 긴 카드 형태)
-            layout.itemSize = CGSize(width: width, height: width * 1.2)
-            
-            // 여백 디테일 주입
-            layout.minimumInteritemSpacing = spacing
-            layout.minimumLineSpacing = spacing
-            layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -119,5 +102,21 @@ extension EncyclopediaViewController: UISearchBarDelegate {
         searchBar.text = ""
         isSearching = false
         collectionView.reloadData()
+    }
+}
+
+extension EncyclopediaViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let padding: CGFloat = 16   // 화면 좌우 여백
+        let spacing: CGFloat = 16   // 셀과 셀 사이의 가로 공백
+        
+        // 🌟 핵심: view.frame 대신 실시간으로 확정된 collectionView.bounds.width를 사용합니다!
+        let collectionViewWidth = collectionView.bounds.width
+        let width = (collectionViewWidth - (padding * 2) - spacing) / 2
+        
+        // 시안 기반의 가로세로 비율 (세로가 살짝 더 긴 카드 형태)
+        return CGSize(width: width, height: width * 1.2)
     }
 }
