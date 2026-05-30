@@ -1096,7 +1096,7 @@
         <scene sceneID="VQA-F6-yG8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kKL-ky-yfC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="도감" image="doc" catalog="system" id="9SU-Zx-73v"/>
+                    <tabBarItem key="tabBarItem" title="도감" image="leaf.fill" catalog="system" id="9SU-Zx-73v"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eB7-ti-Y10">
                         <rect key="frame" x="0.0" y="118" width="393" height="44"/>
@@ -1131,9 +1131,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="doc" catalog="system" width="115" height="128"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="leaf.fill" catalog="system" width="128" height="109"/>
         <image name="photo.badge.plus" catalog="system" width="128" height="97"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
