@@ -89,8 +89,7 @@ class AddDiaryViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    @IBAction func photoButtonTapped(_ sender: UIButton) { // 🌟 스토리보드 photoButton과 Touch Up Inside 재연결 필요!
-        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
+    @IBAction func photoButtonTapped(_ sender: UIButton) {
         
         let status = PHPhotoLibrary.authorizationStatus()
         
