@@ -7,11 +7,13 @@
 
 import UIKit
 
+// 일지 작성 화면에서 선택한 사진 표시 셀
 class PhotoCell: UICollectionViewCell {
     
     var deleteHandler: (() -> Void)?
     
     // MARK: - UI Elements
+    // 선택한 사진 표시 이미지뷰
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
@@ -21,6 +23,7 @@ class PhotoCell: UICollectionViewCell {
         return iv
     }()
     
+    // 우측 상단 삭제 버튼
     let deleteButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
@@ -58,7 +61,7 @@ class PhotoCell: UICollectionViewCell {
             deleteButton.widthAnchor.constraint(equalToConstant: 20),
             deleteButton.heightAnchor.constraint(equalToConstant: 20)
         ])
-        
+    
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
     

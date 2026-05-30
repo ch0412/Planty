@@ -1,3 +1,10 @@
+//
+//  AddDiaryViewController.swift
+//  Planty
+//
+//  Created by choeun on 5/18/26.
+//
+
 import UIKit
 import Photos
 import PhotosUI
@@ -7,6 +14,7 @@ protocol AddDiaryDelegate: AnyObject {
     func didAddDiary(_ diary: DiaryEntry, index: Int?)
 }
 
+// 일지 작성&수정 화면
 class AddDiaryViewController: UIViewController {
     
     // MARK: - IBOutlets
@@ -25,36 +33,16 @@ class AddDiaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        setupTitleLine()
-        
-        // 스토리보드에서 가져온 컬렉션뷰의 대리자 임명
-        photoCollectionView.delegate = self
-        photoCollectionView.dataSource = self
-        contentTextView.delegate = self
-        
         loadExistingDiary()
     }
     
     // MARK: - Setup
+    // 작성&수정 여부에 따라 네비게이션 타이틀 설정
     private func setupNavigationBar() {
-        // diary 있으면 수정, 없으면 작성
         title = diary == nil ? "일지 작성" : "일지 수정"
     }
     
-    private func setupTitleLine() {
-        // 텍스트 필드 밑 언더라인 가이드 주입
-        let titleLine = UIView()
-        titleLine.backgroundColor = .lightGray
-        titleLine.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(titleLine)
-        NSLayoutConstraint.activate([
-            titleLine.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 4),
-            titleLine.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLine.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            titleLine.heightAnchor.constraint(equalToConstant: 0.5)
-        ])
-    }
-    
+    // 수정 모드일 때 기존 일지 데이터를 UI에 반영
     private func loadExistingDiary() {
         guard let diary = diary else { return }
         titleTextField.text = diary.title
@@ -65,10 +53,12 @@ class AddDiaryViewController: UIViewController {
     }
     
     // MARK: - IBActions
+    // 취소 버튼 - 화면 닫기
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
     
+    // 저장 버튼 - 유효성 검사 후 delegate로 데이터 전달
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let title = titleTextField.text?.trimmingCharacters(in: .whitespaces),
               !title.isEmpty else {
@@ -89,8 +79,8 @@ class AddDiaryViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    // 사진 추가 버튼 - 권한 확인 후 PHPicker 실행
     @IBAction func photoButtonTapped(_ sender: UIButton) {
-        
         let status = PHPhotoLibrary.authorizationStatus()
         
         switch status {
@@ -112,20 +102,18 @@ class AddDiaryViewController: UIViewController {
     }
     
     // MARK: - Helper
+    // PHPickerViewController 설정 및 표시
     private func presentPicker() {
-        // 1. 피커 설정 (다중 선택 및 사진만 필터링)
         var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 5  // 🌟 최대 선택 장수 제한 (0으로 두면 무제한!)
-        configuration.filter = .images    // 동영상 제외, 사진만 보이도록 필터링
+        configuration.selectionLimit = 0
+        configuration.filter = .images
                 
-        // 2. 피커 생성 및 대리자(Delegate) 임명
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
-                
-        // 3. 화면에 띄우기
         present(picker, animated: true)
     }
     
+    // 입력 오류 알림 팝업
     private func showAlert(message: String) {
         let alert = UIAlertController(
             title: "입력 오류",
@@ -140,6 +128,7 @@ class AddDiaryViewController: UIViewController {
 // MARK: - UITextViewDelegate
 extension AddDiaryViewController: UITextViewDelegate {
     
+    // 작성 시작 시 플레이스홀더 텍스트 제거
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == "오늘의 일지 작성..." {
             textView.text = nil
@@ -147,6 +136,7 @@ extension AddDiaryViewController: UITextViewDelegate {
         }
     }
     
+    // 편집 종료 시 내용 없으면 플레이스홀더 복원
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = "오늘의 일지 작성..."
@@ -155,39 +145,30 @@ extension AddDiaryViewController: UITextViewDelegate {
     }
 }
 
-// MARK: - PHPickerViewControllerDelegate (다중 선택 완료 처리)
+// MARK: - PHPickerViewControllerDelegate
 extension AddDiaryViewController: PHPickerViewControllerDelegate {
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        // 피커 창 닫기
         picker.dismiss(animated: true)
-        
-        // 유저가 사진을 고르지 않고 취소를 눌렀다면 바로 리턴
         guard !results.isEmpty else { return }
-        
-        // 비동기로 사진을 로드하기 위한 디스패치 그룹 생성 (여러 장이 다 완료될 때까지 기다리는 역할)
         let group = DispatchGroup()
         
         for result in results {
             let itemProvider = result.itemProvider
             
-            // 객체가 UIImage로 로드가 가능한지 검증
             if itemProvider.canLoadObject(ofClass: UIImage.self) {
-                group.enter() // 작업 시작 알림
-                
+                group.enter()
                 itemProvider.loadObject(ofClass: UIImage.self) { [weak self] (image, error) in
                     if let image = image as? UIImage {
-                        // UI 업데이트는 반드시 메인 스레드에서!
                         DispatchQueue.main.async {
                             self?.selectedImages.append(image)
                         }
                     }
-                    group.leave() // 작업 완료 알림
+                    group.leave()
                 }
             }
         }
         
-        // 🌟 모든 사진이 다 selectedImages 리스트에 추가 완료되었다면 컬렉션뷰 새로고침!
         group.notify(queue: .main) { [weak self] in
             self?.photoCollectionView.reloadData()
         }
@@ -197,10 +178,12 @@ extension AddDiaryViewController: PHPickerViewControllerDelegate {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension AddDiaryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    // 선택한 사진 수만큼 셀 표시
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return selectedImages.count
     }
     
+    // 각 셀에 사진 주입 및 삭제 핸들러 연결
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotoCell
         cell.configure(with: selectedImages[indexPath.item])

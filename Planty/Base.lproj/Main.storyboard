@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--일지 작성-->
+        <!--Add Diary View Controller-->
         <scene sceneID="r6q-RZ-0qh">
             <objects>
-                <viewController storyboardIdentifier="AddDiaryVC" id="NJm-sn-XyE" customClass="AddDiaryViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddDiaryVC" id="NJm-sn-XyE" userLabel="Add Diary View Controller" customClass="AddDiaryViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3dq-0B-xiD">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,6 +25,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fnb-bM-GEZ">
+                                <rect key="frame" x="20" y="204" width="353" height="0.66666666666665719"/>
+                                <color key="backgroundColor" name="separatorColor" catalog="System" colorSpace="catalog"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="qZN-r1-BVe"/>
+                                </constraints>
+                            </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="오늘의 일지 작성..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v4x-0D-g1x" userLabel="Content">
                                 <rect key="frame" x="20" y="216" width="353" height="587"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -57,6 +64,10 @@
                                         </collectionViewCellContentView>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="NJm-sn-XyE" id="FrJ-3e-SPK"/>
+                                    <outlet property="delegate" destination="NJm-sn-XyE" id="5aj-Iq-osQ"/>
+                                </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uES-07-fLf" userLabel="Photo Button">
                                 <rect key="frame" x="308.33333333333331" y="678.66666666666663" width="54.666666666666686" height="34.333333333333371"/>
@@ -77,11 +88,14 @@
                             <constraint firstItem="5ha-Ly-0ca" firstAttribute="leading" secondItem="4uJ-4w-jyv" secondAttribute="leading" id="AEl-99-KJU"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="trailing" secondItem="v4x-0D-g1x" secondAttribute="trailing" constant="20" id="EeG-j6-NpI"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="trailing" secondItem="V8A-8C-cpH" secondAttribute="trailing" constant="30" id="MN0-fD-feA"/>
+                            <constraint firstItem="Fnb-bM-GEZ" firstAttribute="leading" secondItem="4uJ-4w-jyv" secondAttribute="leading" constant="20" id="VLi-Z7-CD5"/>
                             <constraint firstItem="V8A-8C-cpH" firstAttribute="top" secondItem="4uJ-4w-jyv" secondAttribute="top" constant="100" id="XA3-U6-GEn"/>
                             <constraint firstItem="V8A-8C-cpH" firstAttribute="leading" secondItem="4uJ-4w-jyv" secondAttribute="leading" constant="30" id="blD-MU-Gk1"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="bottom" secondItem="uES-07-fLf" secondAttribute="bottom" constant="70" id="cFK-4c-aBx"/>
+                            <constraint firstItem="Fnb-bM-GEZ" firstAttribute="top" secondItem="V8A-8C-cpH" secondAttribute="bottom" constant="4" id="ci6-qu-RX4"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="trailing" secondItem="uES-07-fLf" secondAttribute="trailing" constant="30" id="eV9-Cq-z0B"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="bottom" secondItem="5ha-Ly-0ca" secondAttribute="bottom" constant="140" id="pFj-eQ-zg8"/>
+                            <constraint firstItem="4uJ-4w-jyv" firstAttribute="trailing" secondItem="Fnb-bM-GEZ" secondAttribute="trailing" constant="20" id="vRC-zf-xgp"/>
                             <constraint firstItem="4uJ-4w-jyv" firstAttribute="bottom" secondItem="v4x-0D-g1x" secondAttribute="bottom" constant="-20" id="wSM-K5-T6g"/>
                         </constraints>
                     </view>
@@ -108,10 +122,10 @@
             </objects>
             <point key="canvasLocation" x="5002.2900763358775" y="-964.08450704225356"/>
         </scene>
-        <!--Home View Controller-->
+        <!--홈-->
         <scene sceneID="pET-wd-xlu">
             <objects>
-                <viewController id="a4B-Cq-z7W" customClass="HomeViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="a4B-Cq-z7W" userLabel="홈" customClass="HomeViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R62-5N-KVj">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -374,10 +388,10 @@
             </objects>
             <point key="canvasLocation" x="2156" y="-544"/>
         </scene>
-        <!--Add Plant View Controller-->
+        <!--식물 등록-->
         <scene sceneID="da4-Cr-NNq">
             <objects>
-                <viewController storyboardIdentifier="AddPlantVC" id="kWO-22-sOL" userLabel="Add Plant View Controller" customClass="AddPlantViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddPlantVC" id="kWO-22-sOL" userLabel="식물 등록" customClass="AddPlantViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wxs-Uj-Pa4">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -495,7 +509,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QWf-AL-o5X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6855.7251908396947" y="-239.43661971830988"/>
+            <point key="canvasLocation" x="4076" y="-101"/>
         </scene>
         <!--Plant Detail View Controller-->
         <scene sceneID="GwL-zv-cRK">
@@ -538,12 +552,12 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKm-XU-Ojz" userLabel="Species">
                                 <rect key="frame" x="20.000000000000004" y="306" width="37.333333333333343" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xu4-19-d2d">
                                 <rect key="frame" x="0.0" y="338" width="393" height="0.66666666666668561"/>
-                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <color key="backgroundColor" name="separatorColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="7vf-FH-HJe"/>
                                 </constraints>
@@ -553,7 +567,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DiaryCell" id="Ylg-bY-JdX" customClass="DiaryCell" customModule="Planty" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DiaryCell" id="Ylg-bY-JdX" customClass="DiaryCell" customModule="Planty" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ylg-bY-JdX" id="yxL-0Q-ohY">
@@ -571,7 +585,7 @@
                                                         </label>
                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KWm-9x-Fid">
                                                             <rect key="frame" x="0.0" y="40.333333333333343" width="345" height="0.6666666666666643"/>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <color key="backgroundColor" name="separatorColor" catalog="System" colorSpace="catalog"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="0.5" id="n0I-Is-5Iq"/>
                                                             </constraints>
@@ -582,14 +596,19 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2ys-aw-QeJ">
+                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2ys-aw-QeJ">
                                                             <rect key="frame" x="16" y="82" width="313" height="0.0"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" id="FXA-Rr-Xgx"/>
                                                             </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="8"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="JWm-zg-hbd" secondAttribute="trailing" constant="16" id="Iw9-pn-yLT"/>
                                                         <constraint firstAttribute="trailing" secondItem="KWm-9x-Fid" secondAttribute="trailing" id="Mcc-GP-WYe"/>
@@ -605,6 +624,11 @@
                                                         <constraint firstItem="KWm-9x-Fid" firstAttribute="leading" secondItem="FIC-fg-oOY" secondAttribute="leading" id="k3H-y5-u9I"/>
                                                         <constraint firstItem="KWm-9x-Fid" firstAttribute="top" secondItem="JWm-zg-hbd" secondAttribute="bottom" constant="8" id="mMn-aO-bv3"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -614,6 +638,7 @@
                                                 <constraint firstItem="FIC-fg-oOY" firstAttribute="top" secondItem="yxL-0Q-ohY" secondAttribute="top" constant="8" id="fT5-lS-ZoK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="cardView" destination="FIC-fg-oOY" id="cnx-Pt-sxt"/>
                                             <outlet property="contentLabel" destination="lYg-zK-oYb" id="bij-LM-O1a"/>
@@ -624,6 +649,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="o3G-lQ-c9D" id="2Y7-Zj-Pfj"/>
+                                    <outlet property="delegate" destination="o3G-lQ-c9D" id="4X7-Hc-I81"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbk-bu-ebX" userLabel="Plus">
                                 <rect key="frame" x="317" y="756" width="56" height="56"/>
@@ -680,7 +709,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="9ig-uo-07r">
             <objects>
-                <tabBarController id="1AP-eB-Iy5" sceneMemberID="viewController">
+                <tabBarController id="1AP-eB-Iy5" customClass="TabBarController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="K1T-8W-yzz">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -714,10 +743,10 @@
             </objects>
             <point key="canvasLocation" x="1287.7862595419847" y="-444.36619718309862"/>
         </scene>
-        <!--식물 도감-->
+        <!--Encyc View Controller-->
         <scene sceneID="J6z-HV-Sip">
             <objects>
-                <viewController id="tYf-vA-6dA" customClass="EncyclopediaViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tYf-vA-6dA" userLabel="Encyc View Controller" customClass="EncyclopediaViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2lL-QR-24k">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -810,7 +839,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ph0-sO-37G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2084.7328244274809" y="253.52112676056339"/>
+            <point key="canvasLocation" x="2097" y="710"/>
         </scene>
         <!--Plant Encyc Detail View Controller-->
         <scene sceneID="rmz-nO-DxY">
@@ -1054,7 +1083,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6U-hp-9ez" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3658.7786259541981" y="260.56338028169017"/>
+            <point key="canvasLocation" x="3857" y="710"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WnQ-OQ-SAV">
@@ -1072,12 +1101,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wLH-1v-XzX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5929.0076335877857" y="-239.43661971830988"/>
+            <point key="canvasLocation" x="3149" y="-101"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Add Diary Navigation Controller-->
         <scene sceneID="ihg-ZI-Bq5">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="41C-8c-A2U" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="41C-8c-A2U" userLabel="Add Diary Navigation Controller" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qw5-FT-kJS">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
@@ -1092,10 +1121,10 @@
             </objects>
             <point key="canvasLocation" x="4075.5725190839694" y="-964.08450704225356"/>
         </scene>
-        <!--도감-->
+        <!--Encyc Navigation Controller-->
         <scene sceneID="VQA-F6-yG8">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kKL-ky-yfC" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kKL-ky-yfC" userLabel="Encyc Navigation Controller" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="도감" image="leaf.fill" catalog="system" id="9SU-Zx-73v"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eB7-ti-Y10">
@@ -1111,10 +1140,10 @@
             </objects>
             <point key="canvasLocation" x="1159.5419847328244" y="253.52112676056339"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Encyc Detail Navigation Controller-->
         <scene sceneID="4Ck-td-5dV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Odr-Ks-fpg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Odr-Ks-fpg" userLabel="Encyc Detail Navigation Controller" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pMh-67-llq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
@@ -1127,7 +1156,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YIp-d0-w4U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2907.6335877862593" y="260.56338028169017"/>
+            <point key="canvasLocation" x="2967" y="710"/>
         </scene>
     </scenes>
     <resources>
@@ -1138,9 +1167,6 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
