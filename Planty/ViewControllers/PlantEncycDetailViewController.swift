@@ -56,11 +56,13 @@ class PlantEncycDetailViewController: UIViewController {
             toxicityLabel.text = "⚠️ 독성 있음"
             toxicityLabel.textColor = UIColor.systemRed
             // 독성이 있을 때: 연한 핑크빛 빨간 배경색
+            toxicityLabel.backgroundColor = UIColor(red: 1.0, green: 0.92, blue: 0.92, alpha: 1.0)
         } else {
             
             toxicityLabel.text = "✅ 독성 없음"
             toxicityLabel.textColor = UIColor.systemGreen
             // 독성이 없을 때: 연한 연두빛 초록 배경색
+            toxicityLabel.backgroundColor = UIColor(red: 0.92, green: 0.97, blue: 0.92, alpha: 1.0)
         }
         
         // 5. 이미지 뷰 안전 매핑
