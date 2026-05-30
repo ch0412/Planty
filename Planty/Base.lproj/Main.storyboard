@@ -709,7 +709,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="9ig-uo-07r">
             <objects>
-                <tabBarController id="1AP-eB-Iy5" sceneMemberID="viewController">
+                <tabBarController id="1AP-eB-Iy5" customClass="TabBarController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="K1T-8W-yzz">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
