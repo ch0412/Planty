@@ -20,25 +20,10 @@ class DiaryCell: UITableViewCell {
     
     // MARK: - Setup
     private func setupUI() {
-        backgroundColor = .clear
-        selectionStyle = .none
-        
-        // cardView 스타일
-        cardView.backgroundColor = .white
-        cardView.layer.cornerRadius = 12
         cardView.layer.shadowColor = UIColor.black.cgColor
         cardView.layer.shadowOpacity = 0.08
         cardView.layer.shadowOffset = CGSize(width: 0, height: 2)
         cardView.layer.shadowRadius = 4
-        
-        // separatorLine 스타일
-        separatorLine.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
-        
-        // diaryImageView 스타일
-        diaryImageView.contentMode = .scaleAspectFill
-        diaryImageView.clipsToBounds = true
-        diaryImageView.layer.cornerRadius = 8
-        diaryImageView.isHidden = true
     }
     
     // MARK: - Configure
