@@ -1,5 +1,13 @@
+//
+//  DiaryCell.swift
+//  Planty
+//
+//  Created by choeun on 5/18/26.
+//
+
 import UIKit
 
+// 일지 목록 개별 셀 - 카드 형태로 표시(제목, 날짜, 내용, 사진)
 class DiaryCell: UITableViewCell {
     
     // MARK: - IBOutlets
@@ -8,8 +16,6 @@ class DiaryCell: UITableViewCell {
     @IBOutlet weak var separatorLine: UIView!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var diaryImageView: UIImageView!
-    
-    // imageView 높이 constraint (IBOutlet으로 연결)
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Lifecycle
@@ -27,6 +33,7 @@ class DiaryCell: UITableViewCell {
     }
     
     // MARK: - Configure
+    // 외부에서 DiaryEntry 데이터를 받아 셀 UI에 반영
     func configure(with diary: DiaryEntry) {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
@@ -36,7 +43,6 @@ class DiaryCell: UITableViewCell {
         titleLabel.text = "\(diary.title) - \(dateString)"
         contentLabel.text = diary.content
         
-        // 사진 표시
         if let image = diary.photoImages.first {
             diaryImageView.image = image
             diaryImageView.isHidden = false
