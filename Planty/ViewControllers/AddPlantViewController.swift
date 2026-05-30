@@ -119,7 +119,6 @@ class AddPlantViewController: UIViewController {
     
     // 사진 추가 버튼
     @IBAction func photoButtonTapped(_ sender: UIButton) {
-        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
         
         let status = PHPhotoLibrary.authorizationStatus()
         
