@@ -95,6 +95,19 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showAddDiary", sender: indexPath)
     }
+    
+    // 스와이프로 일지 삭제
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let diary = diaries[indexPath.row]
+                
+            CoreDataManager.shared.deleteDiary(diary)
+            diaries.remove(at: indexPath.row)
+            self.plant?.diaries = diaries
+                
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
 
 // MARK: - AddDiaryDelegate
