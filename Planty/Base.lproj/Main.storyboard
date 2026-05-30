@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--일지 작성-->
+        <!--Add Diary View Controller-->
         <scene sceneID="r6q-RZ-0qh">
             <objects>
-                <viewController storyboardIdentifier="AddDiaryVC" id="NJm-sn-XyE" customClass="AddDiaryViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddDiaryVC" id="NJm-sn-XyE" userLabel="Add Diary View Controller" customClass="AddDiaryViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3dq-0B-xiD">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,10 +122,10 @@
             </objects>
             <point key="canvasLocation" x="5002.2900763358775" y="-964.08450704225356"/>
         </scene>
-        <!--Home View Controller-->
+        <!--홈-->
         <scene sceneID="pET-wd-xlu">
             <objects>
-                <viewController id="a4B-Cq-z7W" customClass="HomeViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="a4B-Cq-z7W" userLabel="홈" customClass="HomeViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R62-5N-KVj">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -388,10 +388,10 @@
             </objects>
             <point key="canvasLocation" x="2156" y="-544"/>
         </scene>
-        <!--Add Plant View Controller-->
+        <!--식물 등록-->
         <scene sceneID="da4-Cr-NNq">
             <objects>
-                <viewController storyboardIdentifier="AddPlantVC" id="kWO-22-sOL" userLabel="Add Plant View Controller" customClass="AddPlantViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddPlantVC" id="kWO-22-sOL" userLabel="식물 등록" customClass="AddPlantViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wxs-Uj-Pa4">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -552,12 +552,12 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GKm-XU-Ojz" userLabel="Species">
                                 <rect key="frame" x="20.000000000000004" y="306" width="37.333333333333343" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xu4-19-d2d">
                                 <rect key="frame" x="0.0" y="338" width="393" height="0.66666666666668561"/>
-                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <color key="backgroundColor" name="separatorColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="7vf-FH-HJe"/>
                                 </constraints>
@@ -649,6 +649,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="o3G-lQ-c9D" id="2Y7-Zj-Pfj"/>
+                                    <outlet property="delegate" destination="o3G-lQ-c9D" id="4X7-Hc-I81"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbk-bu-ebX" userLabel="Plus">
                                 <rect key="frame" x="317" y="756" width="56" height="56"/>
@@ -739,10 +743,10 @@
             </objects>
             <point key="canvasLocation" x="1287.7862595419847" y="-444.36619718309862"/>
         </scene>
-        <!--식물 도감-->
+        <!--Encyc View Controller-->
         <scene sceneID="J6z-HV-Sip">
             <objects>
-                <viewController id="tYf-vA-6dA" customClass="EncyclopediaViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tYf-vA-6dA" userLabel="Encyc View Controller" customClass="EncyclopediaViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2lL-QR-24k">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1099,10 +1103,10 @@
             </objects>
             <point key="canvasLocation" x="3149" y="-101"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Add Diary Navigation Controller-->
         <scene sceneID="ihg-ZI-Bq5">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="41C-8c-A2U" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="41C-8c-A2U" userLabel="Add Diary Navigation Controller" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qw5-FT-kJS">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
@@ -1117,10 +1121,10 @@
             </objects>
             <point key="canvasLocation" x="4075.5725190839694" y="-964.08450704225356"/>
         </scene>
-        <!--도감-->
+        <!--Encyc Navigation Controller-->
         <scene sceneID="VQA-F6-yG8">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kKL-ky-yfC" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kKL-ky-yfC" userLabel="Encyc Navigation Controller" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="도감" image="leaf.fill" catalog="system" id="9SU-Zx-73v"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eB7-ti-Y10">
@@ -1136,10 +1140,10 @@
             </objects>
             <point key="canvasLocation" x="1159.5419847328244" y="253.52112676056339"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Encyc Detail Navigation Controller-->
         <scene sceneID="4Ck-td-5dV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Odr-Ks-fpg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Odr-Ks-fpg" userLabel="Encyc Detail Navigation Controller" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pMh-67-llq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
@@ -1163,9 +1167,6 @@
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

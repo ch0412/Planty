@@ -17,14 +17,9 @@ class PlantDetailViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
         configureData()
     }
-    
-    private func setupTableView() {
-        diaryTableView.delegate = self
-        diaryTableView.dataSource = self
-    }
+
     
     private func configureData() {
         guard let plant = plant else { return }
