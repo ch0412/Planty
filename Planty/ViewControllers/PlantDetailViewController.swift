@@ -24,7 +24,6 @@ class PlantDetailViewController: UIViewController {
     private func setupTableView() {
         diaryTableView.delegate = self
         diaryTableView.dataSource = self
-        diaryTableView.register(DiaryCell.self, forCellReuseIdentifier: "DiaryCell")
     }
     
     private func configureData() {
