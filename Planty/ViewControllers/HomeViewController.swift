@@ -24,7 +24,9 @@ class HomeViewController: UIViewController {
     
     var todoItems: [TodoItem] = []
     var plants: [Plant] = []
-    let userName = "OO"
+    var userName: String {
+        return UserDefaults.standard.string(forKey: "userName") ?? "사용자"
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
