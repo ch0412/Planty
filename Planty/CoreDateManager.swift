@@ -246,7 +246,7 @@ class CoreDataManager {
     private func convertToDiary(_ object: NSManagedObject) -> Planty.DiaryEntry? {
         guard let title = object.value(forKey: "title") as? String,
               let content = object.value(forKey: "content") as? String,
-              let date = object.value(forKey: "date") as? Date else {
+              let date =        object.value(forKey: "date") as? Date else {
             return nil
         }
         

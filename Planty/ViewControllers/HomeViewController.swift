@@ -19,7 +19,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var gardenTitleLabel: UILabel!
     @IBOutlet weak var plantTableView: UITableView!
     @IBOutlet weak var plusButton: UIButton!
-    
     @IBOutlet weak var todoTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var plantTableHeightConstraint: NSLayoutConstraint!
     
@@ -127,6 +126,43 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             print("\(plants[indexPath.row].name) 선택됨")
             performSegue(withIdentifier: "showPlantDetail", sender: indexPath)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        guard tableView == plantTableView else { return nil }
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, completion in
+            guard let self = self else { return }
+            
+            let alert = UIAlertController(
+                title: "식물 삭제",
+                message: "\(self.plants[indexPath.row].name)을(를) 삭제하시겠습니까?",
+                preferredStyle: .alert
+            )
+            
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+                completion(false)
+            }
+            
+            let confirmAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
+                let plant = self.plants[indexPath.row]
+                CoreDataManager.shared.deletePlant(plant)  // ← 이미 있는 메서드 그대로 사용
+                self.plants.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                self.gardenTitleLabel.text = "\(self.userName)님의 정원 (\(self.plants.count)개)"
+                self.plantTableHeightConstraint.constant = CGFloat(self.plants.count) * 182
+                completion(true)
+            }
+            
+            alert.addAction(cancelAction)
+            alert.addAction(confirmAction)
+            self.present(alert, animated: true)
+        }
+        
+        deleteAction.image = UIImage(systemName: "trash")
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 
