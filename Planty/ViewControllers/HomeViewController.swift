@@ -20,7 +20,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var plantTableView: UITableView!
     @IBOutlet weak var plusButton: UIButton!
     
-    // 테이블뷰 높이 (동적으로 변경)
     @IBOutlet weak var todoTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var plantTableHeightConstraint: NSLayoutConstraint!
     
@@ -33,17 +32,11 @@ class HomeViewController: UIViewController {
     var plants: [Plant] = []
     let userName = "OO"
     
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.isHidden = true
-        
-        setupUI()
-        setupTableViews()
         configureData()
-        
         view.bringSubviewToFront(plusButton)
     }
     
@@ -59,23 +52,7 @@ class HomeViewController: UIViewController {
         plantTableHeightConstraint.constant = CGFloat(plants.count) * 106
     }
     
-    // MARK: - Setup
-    private func setupUI() {
-        // 그림자만 코드로 처리 (스토리보드 불가)
-        plusButton.layer.shadowColor = UIColor.black.cgColor
-        plusButton.layer.shadowOpacity = 0.3
-        plusButton.layer.shadowOffset = CGSize(width: 0, height: 4)
-        plusButton.layer.shadowRadius = 8
-    }
-    
-    private func setupTableViews() {
-        todoTableView.delegate = self
-        todoTableView.dataSource = self
-        
-        plantTableView.delegate = self
-        plantTableView.dataSource = self
-    }
-    
+    // MARK: - Data
     private func configureData() {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
@@ -120,11 +97,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == todoTableView {
-            return todoItems.count
-        } else {
-            return plants.count
-        }
+        return tableView == todoTableView ? todoItems.count : plants.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -150,16 +123,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             performSegue(withIdentifier: "showPlantDetail", sender: indexPath)
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if tableView == todoTableView {
-            return 50
-        } else {
-            return 106
-        }
-    }
 }
 
+// MARK: - AddPlantDelegate
 extension HomeViewController: AddPlantDelegate {
     func didAddPlant(_ plant: Plant) {
         CoreDataManager.shared.createPlant(plant)
