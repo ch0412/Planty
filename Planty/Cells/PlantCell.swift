@@ -22,17 +22,12 @@ class PlantCell: UITableViewCell {
     
     private func setupStyle() {
         // 카드 스타일
-        cardView.layer.cornerRadius = 16
         cardView.layer.shadowColor = UIColor.black.cgColor
         cardView.layer.shadowOffset = CGSize(width: 0, height: 2)
         cardView.layer.shadowRadius = 6
         cardView.layer.shadowOpacity = 0.08
         
-        // D+Day 컨테이너 스타일
-        dDayContainer.layer.cornerRadius = 18
-        dDayContainer.layer.borderWidth = 1.5
-        dDayContainer.layer.borderColor = UIColor(red: 0.6, green: 0.85,
-                                                   blue: 0.6, alpha: 1.0).cgColor
+        dDayContainer.layer.borderColor = UIColor(red: 0.6, green: 0.85, blue: 0.6, alpha: 1.0).cgColor
     }
     
     func configure(with plant: Plant) {
