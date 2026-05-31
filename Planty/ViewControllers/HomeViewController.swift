@@ -22,12 +22,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var todoTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var plantTableHeightConstraint: NSLayoutConstraint!
     
-    // MARK: - 목업 데이터
-    var todoItems: [TodoItem] = [
-        TodoItem(title: "베리베리 물주기", isCompleted: true),
-        TodoItem(title: "카스테라 창가로 옮기기", isCompleted: false)
-    ]
-    
+    var todoItems: [TodoItem] = []
     var plants: [Plant] = []
     let userName = "OO"
     
@@ -52,8 +47,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        todoTableHeightConstraint.constant = CGFloat(todoItems.count) * 50
-        plantTableHeightConstraint.constant = CGFloat(plants.count) * 106
     }
     
     // MARK: - Data
@@ -62,7 +55,6 @@ class HomeViewController: UIViewController {
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.dateFormat = "M월 d일 (E)"
         dateLabel.text = formatter.string(from: Date())
-        
         gardenTitleLabel.text = "\(userName)님의 정원 (\(plants.count)개)"
     }
     
@@ -72,6 +64,29 @@ class HomeViewController: UIViewController {
         gardenTitleLabel.text = "\(userName)님의 정원 (\(plants.count)개)"
         plantTableHeightConstraint.constant = CGFloat(plants.count) * 106
         plantTableView.reloadData()
+        loadTodoItems()
+    }
+    
+    // MARK: - 오늘의 할 일 계산
+    private func loadTodoItems() {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+            
+        todoItems = plants.compactMap { plant in
+            let start = calendar.startOfDay(for: plant.startDate)
+            let daysPassed = calendar.dateComponents([.day], from: start, to: today).day ?? 0
+                
+                // 시작일 당일 또는 관수주기로 나누어 떨어지는 날
+            guard daysPassed >= 0,
+                    plant.waterCycle > 0,
+                    daysPassed % plant.waterCycle == 0 else { return nil }
+                
+            return TodoItem(title: "\(plant.name) 물주기", plantId: plant.id)
+        }
+            
+            // 빈 상태면 높이 50 (메시지 1줄), 아니면 항목 수 * 50
+        todoTableHeightConstraint.constant = todoItems.isEmpty ? 50 : CGFloat(todoItems.count) * 50
+            todoTableView.reloadData()
     }
     
     // MARK: - IBActions
@@ -101,15 +116,23 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableView == todoTableView ? todoItems.count : plants.count
+        if tableView == todoTableView {
+            return todoItems.isEmpty ? 1 : todoItems.count
+        }
+        return plants.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == todoTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell",
                                                      for: indexPath) as! TodoCell
-            cell.configure(with: todoItems[indexPath.row])
+            if todoItems.isEmpty {
+                cell.configureEmpty()
+            } else {
+                cell.configure(with: todoItems[indexPath.row])
+            }
             return cell
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PlantCell",
                                                      for: indexPath) as! PlantCell
@@ -120,6 +143,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == todoTableView {
+            guard !todoItems.isEmpty else { return }
             todoItems[indexPath.row].isCompleted.toggle()
             todoTableView.reloadRows(at: [indexPath], with: .automatic)
         } else {
@@ -152,6 +176,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                 tableView.deleteRows(at: [indexPath], with: .automatic)
                 self.gardenTitleLabel.text = "\(self.userName)님의 정원 (\(self.plants.count)개)"
                 self.plantTableHeightConstraint.constant = CGFloat(self.plants.count) * 182
+                self.loadTodoItems()
                 completion(true)
             }
             

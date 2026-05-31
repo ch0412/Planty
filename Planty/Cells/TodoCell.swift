@@ -14,17 +14,24 @@ class TodoCell: UITableViewCell {
     
     func configure(with todo: TodoItem) {
         titleLabel.text = todo.title
-        
+        titleLabel.textColor = .label
+        checkBoxImageView.isHidden = false
+        selectionStyle = .none
+            
+        let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
         if todo.isCompleted {
-            let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
-            checkBoxImageView.image = UIImage(systemName: "checkmark.square.fill",
-                                             withConfiguration: config)
-            checkBoxImageView.tintColor = UIColor(red: 0.6, green: 0.8, blue: 0.6, alpha: 1.0)
+            checkBoxImageView.image = UIImage(systemName: "checkmark.square.fill", withConfiguration: config)
         } else {
-            let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
-            checkBoxImageView.image = UIImage(systemName: "checkmark.square",
-                                             withConfiguration: config)
-            checkBoxImageView.tintColor = UIColor(red: 0.6, green: 0.8, blue: 0.6, alpha: 1.0)
+            checkBoxImageView.image = UIImage(systemName: "checkmark.square", withConfiguration: config)
         }
+        checkBoxImageView.tintColor = UIColor(red: 0.6, green: 0.8, blue: 0.6, alpha: 1.0)
+    }
+    
+    // 빈 상태 메시지
+    func configureEmpty() {
+        titleLabel.text = "오늘의 할 일이 없습니다."
+        titleLabel.textColor = .systemGray
+        checkBoxImageView.isHidden = true
+        selectionStyle = .none
     }
 }
