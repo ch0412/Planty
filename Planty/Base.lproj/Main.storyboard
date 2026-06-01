@@ -14,11 +14,11 @@
             <objects>
                 <viewController storyboardIdentifier="AddDiaryVC" id="NJm-sn-XyE" userLabel="Add Diary View Controller" customClass="AddDiaryViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3dq-0B-xiD">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제목" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V8A-8C-cpH" userLabel="Title">
-                                <rect key="frame" x="30" y="156" width="333" height="44"/>
+                                <rect key="frame" x="30" y="203" width="333" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Vx5-g6-sx9"/>
                                 </constraints>
@@ -26,14 +26,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fnb-bM-GEZ">
-                                <rect key="frame" x="20" y="204" width="353" height="0.66666666666665719"/>
+                                <rect key="frame" x="20" y="251" width="353" height="0.66666666666665719"/>
                                 <color key="backgroundColor" name="separatorColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="qZN-r1-BVe"/>
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="오늘의 일지 작성..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="v4x-0D-g1x" userLabel="Content">
-                                <rect key="frame" x="20" y="216" width="353" height="587"/>
+                                <rect key="frame" x="20" y="263" width="353" height="526"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -43,7 +43,7 @@
                                 </connections>
                             </textView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5ha-Ly-0ca">
-                                <rect key="frame" x="0.0" y="543" width="393" height="100"/>
+                                <rect key="frame" x="0.0" y="529" width="393" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="6SG-Zd-hyL"/>
@@ -70,7 +70,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uES-07-fLf" userLabel="Photo Button">
-                                <rect key="frame" x="308.33333333333331" y="678.66666666666663" width="54.666666666666686" height="34.333333333333371"/>
+                                <rect key="frame" x="308.33333333333331" y="664.66666666666663" width="54.666666666666686" height="34.333333333333371"/>
                                 <color key="tintColor" systemColor="systemGrayColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="photo.badge.plus" catalog="system"/>
@@ -408,7 +408,7 @@
             <objects>
                 <viewController storyboardIdentifier="AddPlantVC" id="kWO-22-sOL" userLabel="식물 등록" customClass="AddPlantViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wxs-Uj-Pa4">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="첫 모습을 기록해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXr-Zg-fpp" userLabel="Subtitle">
@@ -722,21 +722,23 @@
                                     <outlet property="delegate" destination="o3G-lQ-c9D" id="4X7-Hc-I81"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbk-bu-ebX" userLabel="Plus">
-                                <rect key="frame" x="317" y="756" width="56" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7I-pl-tz6">
+                                <rect key="frame" x="313" y="689" width="56" height="56"/>
                                 <color key="backgroundColor" red="0.71372550729999995" green="0.8392156959" blue="0.72156864399999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="tintColor" red="0.98039215690000003" green="0.96078431369999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="FXM-aF-erY"/>
+                                    <constraint firstAttribute="height" constant="56" id="rGp-9M-Z8c"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="28"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="41C-8c-A2U" kind="presentation" identifier="showAddDiary" id="Lsq-Nl-cbm"/>
+                                    <segue destination="41C-8c-A2U" kind="show" identifier="showAddDiary" id="7S8-yi-N4r"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -747,6 +749,7 @@
                             <constraint firstItem="b8g-Vr-Uzm" firstAttribute="trailing" secondItem="Xu4-19-d2d" secondAttribute="trailing" id="2Zd-Wg-cvx"/>
                             <constraint firstItem="b8g-Vr-Uzm" firstAttribute="trailing" secondItem="C8J-4a-D03" secondAttribute="trailing" constant="50" id="FDQ-5V-hTV"/>
                             <constraint firstItem="GKm-XU-Ojz" firstAttribute="leading" secondItem="b8g-Vr-Uzm" secondAttribute="leading" constant="20" id="Fg9-p5-owA"/>
+                            <constraint firstItem="b8g-Vr-Uzm" firstAttribute="bottom" secondItem="K7I-pl-tz6" secondAttribute="bottom" constant="24" id="HgT-39-71x"/>
                             <constraint firstItem="GKm-XU-Ojz" firstAttribute="top" secondItem="eqk-fx-Fd2" secondAttribute="bottom" constant="4" id="QJg-i2-3KF"/>
                             <constraint firstItem="gCn-58-HMa" firstAttribute="leading" secondItem="b8g-Vr-Uzm" secondAttribute="leading" id="UKF-Pj-rjV"/>
                             <constraint firstItem="C8J-4a-D03" firstAttribute="top" secondItem="AYc-dy-E0K" secondAttribute="bottom" constant="25" id="VOY-LL-Sgf"/>
@@ -758,12 +761,12 @@
                             <constraint firstItem="gCn-58-HMa" firstAttribute="top" secondItem="GKm-XU-Ojz" secondAttribute="bottom" constant="26" id="bDN-3i-BZm"/>
                             <constraint firstItem="b8g-Vr-Uzm" firstAttribute="trailing" secondItem="gCn-58-HMa" secondAttribute="trailing" id="bft-GZ-5AA"/>
                             <constraint firstItem="b8g-Vr-Uzm" firstAttribute="bottom" secondItem="gCn-58-HMa" secondAttribute="bottom" id="h07-cM-FV7"/>
+                            <constraint firstItem="b8g-Vr-Uzm" firstAttribute="trailing" secondItem="K7I-pl-tz6" secondAttribute="trailing" constant="24" id="nWQ-iL-9IT"/>
                             <constraint firstItem="Xu4-19-d2d" firstAttribute="top" secondItem="GKm-XU-Ojz" secondAttribute="bottom" constant="14" id="yTm-IY-r1I"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3ML-OP-RuL"/>
                     <connections>
-                        <outlet property="addButton" destination="Fbk-bu-ebX" id="Mdd-5f-qQD"/>
                         <outlet property="dDayLabel" destination="C8J-4a-D03" id="HfP-8c-veO"/>
                         <outlet property="diaryTableView" destination="gCn-58-HMa" id="XyW-oU-Mi1"/>
                         <outlet property="plantImageView" destination="AYc-dy-E0K" id="oCm-DA-H9w"/>
@@ -773,7 +776,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IdE-2C-plC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3065" y="-187"/>
+            <point key="canvasLocation" x="3063.3587786259541" y="-187.32394366197184"/>
         </scene>
         <!--Onboarding View Controller-->
         <scene sceneID="wYn-2d-nqg">
@@ -1205,7 +1208,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="zeJ-RR-4D3"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bqC-dI-RRs">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1222,8 +1225,9 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="41C-8c-A2U" userLabel="Add Diary Navigation Controller" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="BGS-y1-uAT"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qw5-FT-kJS">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1274,7 +1278,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fEh-iW-6e2"/>
+        <segue reference="b78-xK-PAF"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
