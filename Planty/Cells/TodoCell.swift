@@ -17,16 +17,25 @@ class TodoCell: UITableViewCell {
     // MARK: - Configure
     // 외부에서 TodoItem 데이터를 받아 셀 UI에 반영
     func configure(with todo: TodoItem) {
-        titleLabel.text = todo.title
-        titleLabel.textColor = .label
         checkBoxImageView.isHidden = false
-           
-        // 완료 여부에 따라 체크박스 이미지 변경
+        
+        // 완료 여부에 따라 체크박스 이미지 및 취소선 변경
         let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
         if todo.isCompleted {
             checkBoxImageView.image = UIImage(systemName: "checkmark.square.fill", withConfiguration: config)
+            // 취소선 추가
+            let attributeString = NSAttributedString(
+                string: todo.title,
+                attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue]
+            )
+            titleLabel.attributedText = attributeString
+            titleLabel.textColor = .systemGray
         } else {
             checkBoxImageView.image = UIImage(systemName: "checkmark.square", withConfiguration: config)
+            // 취소선 제거
+            titleLabel.attributedText = nil
+            titleLabel.text = todo.title
+            titleLabel.textColor = .label
         }
         checkBoxImageView.tintColor = UIColor(red: 0.6, green: 0.8, blue: 0.6, alpha: 1.0)
     }
