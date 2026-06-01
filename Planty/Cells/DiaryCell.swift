@@ -27,9 +27,6 @@ class DiaryCell: UITableViewCell {
     // MARK: - Setup
     private func setupUI() {
         cardView.layer.shadowColor = UIColor.black.cgColor
-        cardView.layer.shadowOpacity = 0.08
-        cardView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        cardView.layer.shadowRadius = 4
     }
     
     // MARK: - Configure

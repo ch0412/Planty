@@ -64,7 +64,7 @@ class SettingViewController: UIViewController {
     
     // 로그아웃 확인 알림 팝업
     private func showLogoutAlert() {
-        let alert = UIAlertController(title: "로그아웃", message: "온보딩 화면으로 이동합니다", preferredStyle: .alert)
+        let alert = UIAlertController(title: "로그아웃", message: "로그인 화면으로 이동합니다", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "취소", style: .cancel)
         let confirmAction = UIAlertAction(title: "로그아웃", style: .destructive) { _ in
             UserDefaults.standard.removeObject(forKey: "userName")
