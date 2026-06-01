@@ -16,7 +16,6 @@ class PlantDetailViewController: UIViewController {
     @IBOutlet weak var dDayLabel: UILabel!
     @IBOutlet weak var speciesLabel: UILabel!
     @IBOutlet weak var diaryTableView: UITableView!
-    @IBOutlet weak var addButton: UIButton!
     
     // MARK: - Properties
     var plant: Plant?

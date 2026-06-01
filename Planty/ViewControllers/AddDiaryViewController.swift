@@ -60,8 +60,7 @@ class AddDiaryViewController: UIViewController {
     
     // 저장 버튼 - 유효성 검사 후 delegate로 데이터 전달
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        guard let title = titleTextField.text?.trimmingCharacters(in: .whitespaces),
-              !title.isEmpty else {
+        guard let title = titleTextField.text?.trimmingCharacters(in: .whitespaces), !title.isEmpty else {
             showAlert(message: "제목을 입력해주세요.")
             return
         }
