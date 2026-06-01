@@ -408,7 +408,7 @@
             <objects>
                 <viewController storyboardIdentifier="AddPlantVC" id="kWO-22-sOL" userLabel="식물 등록" customClass="AddPlantViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wxs-Uj-Pa4">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="첫 모습을 기록해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXr-Zg-fpp" userLabel="Subtitle">
@@ -554,9 +554,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="ueA-K1-UdL" kind="show" identifier="showEditPlant" id="fEh-iW-6e2"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -573,6 +570,7 @@
                     <navigationItem key="navigationItem" title="설정" id="EfO-rQ-0AR"/>
                     <connections>
                         <outlet property="tableView" destination="fov-hJ-yss" id="5B4-5d-pnW"/>
+                        <segue destination="ueA-K1-UdL" kind="show" identifier="showEditPlant" id="vKE-Rl-YLt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ct2-uI-5oK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1208,7 +1206,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="zeJ-RR-4D3"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bqC-dI-RRs">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1278,7 +1276,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="b78-xK-PAF"/>
+        <segue reference="vKE-Rl-YLt"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>

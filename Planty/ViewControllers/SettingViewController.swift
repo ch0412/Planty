@@ -133,11 +133,14 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        // 계정 섹션 - 닉네임 변경 또는 로그아웃
+            
         if indexPath.section == 0 {
+            // 계정 섹션 - 닉네임 변경 또는 로그아웃
             indexPath.row == 0 ? showChangeNameAlert() : showLogoutAlert()
-        } 
+        } else {
+            // 식물 관리 섹션 - 식물 수정 화면으로 이동
+            performSegue(withIdentifier: "showEditPlant", sender: tableView.cellForRow(at: indexPath))
+        }
     }
 }
 
