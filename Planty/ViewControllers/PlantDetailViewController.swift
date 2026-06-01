@@ -97,16 +97,40 @@ extension PlantDetailViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     // 스와이프로 일지 삭제
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let diary = diaries[indexPath.row]
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "") { [weak self] _, _, completion in
+            guard let self = self else { return }
+            
+            let alert = UIAlertController(
+                title: "일지 삭제",
+                message: "\(self.diaries[indexPath.row].title)을(를) 삭제하시겠습니까?",
+                preferredStyle: .alert
+            )
+            
+            let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+                completion(false)
+            }
+            
+            let confirmAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
+                let diary = self.diaries[indexPath.row]
                 
-            CoreDataManager.shared.deleteDiary(diary)
-            diaries.remove(at: indexPath.row)
-            self.plant?.diaries = diaries
+                CoreDataManager.shared.deleteDiary(diary)
+                self.diaries.remove(at: indexPath.row)
+                self.plant?.diaries = self.diaries
                 
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                completion(true)
+            }
+            
+            alert.addAction(cancelAction)
+            alert.addAction(confirmAction)
+            self.present(alert, animated: true)
         }
+        
+        deleteAction.image = UIImage(systemName: "trash")
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 
