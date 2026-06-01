@@ -14,7 +14,7 @@ protocol AddDiaryDelegate: AnyObject {
     func didAddDiary(_ diary: DiaryEntry, index: Int?)
 }
 
-// 일지 작성&수정 화면
+// 일지 작성 & 수정 화면 - 제목, 내용, 사진을 입력받아 일지 작성
 class AddDiaryViewController: UIViewController {
     
     // MARK: - IBOutlets
@@ -37,7 +37,7 @@ class AddDiaryViewController: UIViewController {
     }
     
     // MARK: - Setup
-    // 작성&수정 여부에 따라 네비게이션 타이틀 설정
+    // 작성 & 수정 여부에 따라 네비게이션 타이틀 설정
     private func setupNavigationBar() {
         title = diary == nil ? "일지 작성" : "일지 수정"
     }

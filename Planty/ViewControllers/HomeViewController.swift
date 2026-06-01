@@ -7,6 +7,7 @@
 
 import UIKit
 
+// 홈 화면 - 오늘의 할 일(물주기)과 정원 식물 목록을 표시하는 메인 화면
 class HomeViewController: UIViewController {
     
     // MARK: - IBOutlets
@@ -22,8 +23,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var todoTableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var plantTableHeightConstraint: NSLayoutConstraint!
     
+    // MARK: - Properties
     var todoItems: [TodoItem] = []
     var plants: [Plant] = []
+    // UserDefaults에서 저장된 닉네임 불러오기(없으면 "사용자")
     var userName: String {
         return UserDefaults.standard.string(forKey: "userName") ?? "사용자"
     }
@@ -31,18 +34,15 @@ class HomeViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.contentInset = .zero
         scrollView.scrollIndicatorInsets = .zero
-
-        
         configureData()
-        view.bringSubviewToFront(plusButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // 화면 진입 시마다 식물 데이터 갱신
         navigationController?.popToRootViewController(animated: false)
         loadPlants()
     }
@@ -52,6 +52,7 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Data
+    // 날짜 및 정원 타이틀 초기 설정
     private func configureData() {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
@@ -61,6 +62,7 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - CoreData
+    // CoreData에서 식물 목록 불러와 UI 갱신
     private func loadPlants() {
         plants = CoreDataManager.shared.fetchPlants()
         gardenTitleLabel.text = "\(userName)님의 정원 (\(plants.count)개)"
@@ -70,6 +72,7 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - 오늘의 할 일 계산
+    // 관수 주기를 기반으로 오늘 물줘야 할 식물 목록 계산
     private func loadTodoItems() {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
@@ -78,28 +81,24 @@ class HomeViewController: UIViewController {
             let start = calendar.startOfDay(for: plant.startDate)
             let daysPassed = calendar.dateComponents([.day], from: start, to: today).day ?? 0
                 
-                // 시작일 당일 또는 관수주기로 나누어 떨어지는 날
+            // 시작일 당일 또는 관수주기로 나누어 떨어지는 날
             guard daysPassed >= 0,
-                    plant.waterCycle > 0,
-                    daysPassed % plant.waterCycle == 0 else { return nil }
+                  plant.waterCycle > 0,
+                  daysPassed % plant.waterCycle == 0 else { return nil }
                 
             return TodoItem(title: "\(plant.name) 물주기", plantId: plant.id)
         }
             
-            // 빈 상태면 높이 50 (메시지 1줄), 아니면 항목 수 * 50
+        // 빈 상태면 높이 50 (메시지 1줄), 아니면 항목 수 * 50
         todoTableHeightConstraint.constant = todoItems.isEmpty ? 50 : CGFloat(todoItems.count) * 50
-            todoTableView.reloadData()
-    }
-    
-    // MARK: - IBActions
-    @IBAction func settingButtonTapped(_ sender: UIButton) {
-        print("설정 버튼 탭")
-        performSegue(withIdentifier: "showSetting", sender: nil)
+        todoTableView.reloadData()
     }
     
     // MARK: - Segue
+    // 화면 전환 시 데이터 전달
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAddPlant" {
+            // 식물 추가 화면 - delegate 연결
             if let nav = segue.destination as? UINavigationController,
                let vc = nav.topViewController as? AddPlantViewController {
                 vc.delegate = self
@@ -107,9 +106,11 @@ class HomeViewController: UIViewController {
                 vc.delegate = self
             }
         } else if segue.identifier == "showPlantDetail" {
+            // 식물 상세 화면 - 선택된 셀로부터 indexPath를 가져와 식물 데이터 전달
             if let vc = segue.destination as? PlantDetailViewController,
-               let indexPath = sender as? IndexPath {
-                vc.plant = plants[indexPath.row]
+                let cell = sender as? PlantCell,
+                let indexPath = plantTableView.indexPath(for: cell) {
+                    vc.plant = plants[indexPath.row]
             }
         }
     }
@@ -120,6 +121,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == todoTableView {
+            // 할 일 없으면 빈 상태 셀 1개 표시
             return todoItems.isEmpty ? 1 : todoItems.count
         }
         return plants.count
@@ -127,8 +129,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == todoTableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell",
-                                                     for: indexPath) as! TodoCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoCell
+            
+            // 할 일 없으면 빈 상태 메시지, 있으면 할 일 표시
             if todoItems.isEmpty {
                 cell.configureEmpty()
             } else {
@@ -137,8 +140,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PlantCell",
-                                                     for: indexPath) as! PlantCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PlantCell", for: indexPath) as! PlantCell
             cell.configure(with: plants[indexPath.row])
             return cell
         }
@@ -146,22 +148,25 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == todoTableView {
+            // 할 일 완료 여부 토글
             guard !todoItems.isEmpty else { return }
             todoItems[indexPath.row].isCompleted.toggle()
             todoTableView.reloadRows(at: [indexPath], with: .automatic)
         } else {
+            // 식물 상세 화면으로 이동
             print("\(plants[indexPath.row].name) 선택됨")
-            performSegue(withIdentifier: "showPlantDetail", sender: indexPath)
         }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        // 식물 목록에서만 스와이프 삭제 허용
         guard tableView == plantTableView else { return nil }
         
         let deleteAction = UIContextualAction(style: .destructive, title: "삭제") { [weak self] _, _, completion in
             guard let self = self else { return }
             
+            // 삭제 확인 얼럿 표시
             let alert = UIAlertController(
                 title: "식물 삭제",
                 message: "\(self.plants[indexPath.row].name)을(를) 삭제하시겠습니까?",
@@ -174,7 +179,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             
             let confirmAction = UIAlertAction(title: "삭제", style: .destructive) { _ in
                 let plant = self.plants[indexPath.row]
-                CoreDataManager.shared.deletePlant(plant)  // ← 이미 있는 메서드 그대로 사용
+                CoreDataManager.shared.deletePlant(plant)
                 self.plants.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
                 self.gardenTitleLabel.text = "\(self.userName)님의 정원 (\(self.plants.count)개)"
