@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "birdofparadise.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
