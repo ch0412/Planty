@@ -87,9 +87,10 @@ class SettingViewController: UIViewController {
     // MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEditPlant",
-           let nav = segue.destination as? UINavigationController,
-           let vc = nav.topViewController as? AddPlantViewController,
-           let indexPath = sender as? IndexPath {
+            let nav = segue.destination as? UINavigationController,
+            let vc = nav.topViewController as? AddPlantViewController,
+            let cell = sender as? UITableViewCell,
+            let indexPath = tableView.indexPath(for: cell) {
             vc.plantToEdit = plants[indexPath.row]
             vc.editDelegate = self
         }
@@ -117,6 +118,8 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         print("✅ cellForRowAt: \(indexPath)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath)
         
+        cell.textLabel?.font = .systemFont(ofSize: 16)
+        
         if indexPath.section == 0 {
             cell.textLabel?.text = accountItems[indexPath.row]
             cell.textLabel?.textColor = indexPath.row == 1 ? .systemRed : .label
@@ -134,9 +137,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.section == 0 {
             indexPath.row == 0 ? showChangeNameAlert() : showLogoutAlert()
-        } else {
-            performSegue(withIdentifier: "showEditPlant", sender: indexPath)
-        }
+        } 
     }
 }
 

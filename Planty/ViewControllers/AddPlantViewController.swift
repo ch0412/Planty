@@ -258,13 +258,19 @@ class AddPlantViewController: UIViewController {
     
     // 이미지 표시
     private func showImage(_ image: UIImage) {
-        photoView.subviews.forEach { $0.removeFromSuperview() }
+        // photoButton은 유지하고 imageView만 제거
+        photoView.subviews.forEach {
+            if !($0 is UIButton) { $0.removeFromSuperview() }
+        }
         let imageView = UIImageView(frame: photoView.bounds)
         imageView.image = image
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
         photoView.addSubview(imageView)
+            
+        // imageView를 버튼 아래로 보내기 (버튼이 터치 가능하도록)
+        photoView.sendSubviewToBack(imageView)
     }
 }
 
