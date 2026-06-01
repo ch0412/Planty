@@ -120,7 +120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wrt-G7-8Kv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5002.2900763358775" y="-964.08450704225356"/>
+            <point key="canvasLocation" x="5053" y="-56"/>
         </scene>
         <!--홈-->
         <scene sceneID="pET-wd-xlu">
@@ -176,6 +176,7 @@
                                                         <buttonConfiguration key="configuration" style="plain" image="gearshape.fill" catalog="system"/>
                                                         <connections>
                                                             <action selector="settingButtonTapped:" destination="a4B-Cq-z7W" eventType="touchUpInside" id="9Kn-3F-svK"/>
+                                                            <segue destination="Wp3-AA-fnC" kind="show" identifier="showSetting" id="cQd-Bp-kQ4"/>
                                                         </connections>
                                                     </button>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vcS-xX-0Ny" userLabel="Todo Table View">
@@ -390,27 +391,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nVB-Om-1b6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2153.4351145038167" y="-544.36619718309862"/>
+            <point key="canvasLocation" x="1952" y="-744"/>
         </scene>
         <!--식물 등록-->
         <scene sceneID="da4-Cr-NNq">
             <objects>
                 <viewController storyboardIdentifier="AddPlantVC" id="kWO-22-sOL" userLabel="식물 등록" customClass="AddPlantViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wxs-Uj-Pa4">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="첫 모습을 기록해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXr-Zg-fpp" userLabel="Subtitle">
-                                <rect key="frame" x="20" y="136" width="119" height="19.333333333333343"/>
+                                <rect key="frame" x="20" y="183" width="119" height="19.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJf-L3-bZs" userLabel="Photo View">
-                                <rect key="frame" x="20" y="165.33333333333337" width="353" height="230"/>
+                                <rect key="frame" x="20" y="212.33333333333337" width="353" height="230"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYC-02-doK">
-                                        <rect key="frame" x="146.66666666666666" y="85" width="60" height="60"/>
+                                        <rect key="frame" x="146.66666666666666" y="84.999999999999972" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="FQb-Y4-d2y"/>
                                             <constraint firstAttribute="height" constant="60" id="FUW-hZ-wmN"/>
@@ -436,7 +437,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="품종" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OLH-jq-wmm">
-                                <rect key="frame" x="20" y="435.33333333333331" width="353" height="44"/>
+                                <rect key="frame" x="20" y="482.33333333333331" width="353" height="43.999999999999943"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ndn-Dp-e5W"/>
                                 </constraints>
@@ -444,7 +445,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="시작 날짜" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fDp-pj-trl">
-                                <rect key="frame" x="20" y="563.33333333333337" width="353" height="44"/>
+                                <rect key="frame" x="20" y="610.33333333333337" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="PGs-KF-exv"/>
                                 </constraints>
@@ -452,7 +453,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="관수 주기" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vRD-2w-dqM">
-                                <rect key="frame" x="20" y="627.33333333333337" width="353" height="44"/>
+                                <rect key="frame" x="20" y="674.33333333333337" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="xHb-Fb-aqW"/>
                                 </constraints>
@@ -460,7 +461,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="별명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KVk-Lh-RIy">
-                                <rect key="frame" x="20" y="499.33333333333326" width="353" height="44"/>
+                                <rect key="frame" x="20" y="546.33333333333337" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7iW-vE-43B"/>
                                 </constraints>
@@ -513,7 +514,58 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QWf-AL-o5X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4076" y="-101"/>
+            <point key="canvasLocation" x="4837" y="-773"/>
+        </scene>
+        <!--설정-->
+        <scene sceneID="DSE-qO-7g3">
+            <objects>
+                <viewController storyboardIdentifier="SettingViewController" id="Wp3-AA-fnC" customClass="SettingViewController" customModule="Planty" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="efj-a7-82S">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="fov-hJ-yss">
+                                <rect key="frame" x="0.0" y="59" width="393" height="710"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingCell" textLabel="6wc-uL-mxq" style="IBUITableViewCellStyleDefault" id="9lp-0p-wEj">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9lp-0p-wEj" id="YZK-K2-Sic">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6wc-uL-mxq">
+                                                    <rect key="frame" x="20" y="0.0" width="353" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="883-0e-Gdt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fov-hJ-yss" firstAttribute="top" secondItem="883-0e-Gdt" secondAttribute="top" id="9GQ-9Q-HeG"/>
+                            <constraint firstItem="883-0e-Gdt" firstAttribute="bottom" secondItem="fov-hJ-yss" secondAttribute="bottom" id="Aqs-ce-Rby"/>
+                            <constraint firstItem="fov-hJ-yss" firstAttribute="leading" secondItem="883-0e-Gdt" secondAttribute="leading" id="TLk-1p-HhY"/>
+                            <constraint firstItem="883-0e-Gdt" firstAttribute="trailing" secondItem="fov-hJ-yss" secondAttribute="trailing" id="foh-Ts-nCF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="설정" id="EfO-rQ-0AR"/>
+                    <connections>
+                        <outlet property="tableView" destination="fov-hJ-yss" id="5B4-5d-pnW"/>
+                        <segue destination="ueA-K1-UdL" kind="presentation" identifier="showEditPlant" modalPresentationStyle="fullScreen" id="F54-nn-jSp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ct2-uI-5oK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3776" y="-1534"/>
         </scene>
         <!--Plant Detail View Controller-->
         <scene sceneID="GwL-zv-cRK">
@@ -709,7 +761,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IdE-2C-plC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3149" y="-911"/>
+            <point key="canvasLocation" x="3065" y="-187"/>
         </scene>
         <!--Onboarding View Controller-->
         <scene sceneID="wYn-2d-nqg">
@@ -789,7 +841,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ICo-Pm-uJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1287.7862595419847" y="-444.36619718309862"/>
+            <point key="canvasLocation" x="1098" y="-744"/>
         </scene>
         <!--Encyc View Controller-->
         <scene sceneID="J6z-HV-Sip">
@@ -1139,7 +1191,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ueA-K1-UdL" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bqC-dI-RRs">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1149,7 +1201,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wLH-1v-XzX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3149" y="-101"/>
+            <point key="canvasLocation" x="3714" y="-744"/>
         </scene>
         <!--Add Diary Navigation Controller-->
         <scene sceneID="ihg-ZI-Bq5">
@@ -1167,7 +1219,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l5Y-tu-aRm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4075.5725190839694" y="-964.08450704225356"/>
+            <point key="canvasLocation" x="4126" y="-56"/>
         </scene>
         <!--Encyc Navigation Controller-->
         <scene sceneID="VQA-F6-yG8">
@@ -1186,7 +1238,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TfG-SJ-QUj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1159.5419847328244" y="253.52112676056339"/>
+            <point key="canvasLocation" x="1169" y="710"/>
         </scene>
         <!--Encyc Detail Navigation Controller-->
         <scene sceneID="4Ck-td-5dV">
@@ -1207,6 +1259,9 @@
             <point key="canvasLocation" x="2967" y="710"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="F54-nn-jSp"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>

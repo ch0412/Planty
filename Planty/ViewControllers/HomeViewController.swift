@@ -94,6 +94,7 @@ class HomeViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func settingButtonTapped(_ sender: UIButton) {
         print("설정 버튼 탭")
+        performSegue(withIdentifier: "showSetting", sender: nil)
     }
     
     // MARK: - Segue
