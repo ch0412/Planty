@@ -27,7 +27,25 @@ class PlantDetailViewController: UIViewController {
         configureData()
     }
     
+    // 화면에 다시 나타날 때마다 CoreData에서 최신 데이터 불러오기
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshData()
+    }
+        
     // MARK: - Setup
+    // CoreData에서 최신 식물 데이터 불러와 UI 업데이트
+    private func refreshData() {
+        guard let plant = plant else { return }
+            
+        let plants = CoreDataManager.shared.fetchPlants()
+        if let updatedPlant = plants.first(where: { $0.id == plant.id }) {
+            self.plant = updatedPlant
+            diaries = updatedPlant.diaries
+            configureData()
+        }
+    }
+    
     // 전달받은 식물 데이터를 UI에 반영
     private func configureData() {
         guard let plant = plant else { return }

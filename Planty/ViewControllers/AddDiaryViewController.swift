@@ -67,12 +67,16 @@ class AddDiaryViewController: UIViewController {
         
         let content = contentTextView.textColor == .lightGray ? "" : contentTextView.text ?? ""
         
-        let newDiary = DiaryEntry(
+        var newDiary = DiaryEntry(
             title: title,
             content: content,
             date: diary?.date ?? Date(),
             photoImages: selectedImages
         )
+        
+        if let existingDiary = diary {
+            newDiary.id = existingDiary.id
+        }
         
         delegate?.didAddDiary(newDiary, index: diaryIndex)
         dismiss(animated: true)
