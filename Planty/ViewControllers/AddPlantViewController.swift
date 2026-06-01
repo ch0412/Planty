@@ -13,6 +13,10 @@ protocol AddPlantDelegate: AnyObject {
     func didAddPlant(_ plant: Plant)
 }
 
+protocol EditPlantDelegate: AnyObject {
+    func didEditPlant()
+}
+
 class AddPlantViewController: UIViewController {
     
     // MARK: - IBOutlets
@@ -25,6 +29,8 @@ class AddPlantViewController: UIViewController {
     
     // MARK: - Properties
     weak var delegate: AddPlantDelegate?
+    weak var editDelegate: EditPlantDelegate?
+    var plantToEdit: Plant? = nil
     var selectedDate: Date = Date()
     var selectedWaterCycle: Int = 3
     let waterCycleOptions = [1, 2, 3, 4, 5, 6, 7, 10, 14, 21, 30, 45, 60]
@@ -37,6 +43,7 @@ class AddPlantViewController: UIViewController {
         setupDatePicker()
         setupWaterCyclePicker()
         setupTapGesture()
+        configureMode()
     }
     
     // 레이아웃 완료 후 점선 테두리 추가
@@ -45,6 +52,49 @@ class AddPlantViewController: UIViewController {
         if !dashBorderAdded {
             setupDashBorder()
             dashBorderAdded = true
+        }
+        
+        if let image = selectedImage, dashBorderAdded {
+            showImage(image)
+        }
+    }
+    
+    // MARK: - 모드 설정
+    private func configureMode() {
+        if let plant = plantToEdit {
+            // 수정 모드
+            title = "식물 정보 수정"
+                
+            // 기존 데이터 채우기
+            nicknameTextField.text = plant.name
+            speciesTextField.text = plant.species
+            selectedDate = plant.startDate
+            selectedWaterCycle = plant.waterCycle
+            selectedImage = plant.photoImage
+                
+            // 날짜 텍스트 표시
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "ko_KR")
+            formatter.dateFormat = "yyyy년 M월 d일"
+            startDateTextField.text = formatter.string(from: plant.startDate)
+                
+            // 관수 주기 텍스트 표시
+            waterCycleTextField.text = "\(plant.waterCycle)일마다"
+                
+            // DatePicker 날짜 설정
+            if let datePicker = startDateTextField.inputView as? UIDatePicker {
+                datePicker.date = plant.startDate
+            }
+                
+            // PickerView 관수 주기 설정
+            if let picker = waterCycleTextField.inputView as? UIPickerView,
+                let index = waterCycleOptions.firstIndex(of: plant.waterCycle) {
+                picker.selectRow(index, inComponent: 0, animated: false)
+            }
+                
+        } else {
+            // 등록 모드
+            title = "새 식물 등록"
         }
     }
     
@@ -105,16 +155,28 @@ class AddPlantViewController: UIViewController {
             return
         }
         
-        var newPlant = Plant(
-            name: nickname,
-            species: species,
-            startDate: selectedDate,
-            waterCycle: selectedWaterCycle
-        )
-        newPlant.photoImage = selectedImage
-        
-        delegate?.didAddPlant(newPlant)
-        dismiss(animated: true)
+        if var plant = plantToEdit {
+            // 수정 모드
+            plant.name = nickname
+            plant.species = species
+            plant.startDate = selectedDate
+            plant.waterCycle = selectedWaterCycle
+            plant.photoImage = selectedImage
+            CoreDataManager.shared.updatePlant(plant)
+            editDelegate?.didEditPlant()
+            dismiss(animated: true)
+        } else {
+            // 등록 모드
+            var newPlant = Plant(
+                name: nickname,
+                species: species,
+                startDate: selectedDate,
+                waterCycle: selectedWaterCycle
+            )
+            newPlant.photoImage = selectedImage
+            delegate?.didAddPlant(newPlant)
+            dismiss(animated: true)
+        }
     }
     
     // 사진 추가 버튼
@@ -193,6 +255,17 @@ class AddPlantViewController: UIViewController {
         picker.allowsEditing = true
         present(picker, animated: true)
     }
+    
+    // 이미지 표시
+    private func showImage(_ image: UIImage) {
+        photoView.subviews.forEach { $0.removeFromSuperview() }
+        let imageView = UIImageView(frame: photoView.bounds)
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 8
+        photoView.addSubview(imageView)
+    }
 }
 
 // MARK: - UIPickerViewDelegate, UIPickerViewDataSource
@@ -204,12 +277,10 @@ extension AddPlantViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return waterCycleOptions.count
     }
     
-    // 관수 주기 옵션 텍스트
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return "\(waterCycleOptions[row])일마다"
     }
     
-    // 관수 주기 선택
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedWaterCycle = waterCycleOptions[row]
         waterCycleTextField.text = "\(waterCycleOptions[row])일마다"
@@ -219,7 +290,6 @@ extension AddPlantViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 // MARK: - UIImagePickerControllerDelegate
 extension AddPlantViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    // 사진 선택 완료
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         let image = (info[.editedImage] as? UIImage) ?? (info[.originalImage] as? UIImage)
@@ -228,21 +298,10 @@ extension AddPlantViewController: UIImagePickerControllerDelegate, UINavigationC
             return
         }
         selectedImage = image
-        
-        // 기존 뷰 제거 후 선택한 이미지 표시
-        photoView.subviews.forEach { $0.removeFromSuperview() }
-        
-        let imageView = UIImageView(frame: photoView.bounds)
-        imageView.image = image
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 8
-        photoView.addSubview(imageView)
-        
+        showImage(image)
         dismiss(animated: true)
     }
 
-    // 사진 선택 취소
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true)
     }
