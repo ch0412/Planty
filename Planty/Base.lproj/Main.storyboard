@@ -175,8 +175,7 @@
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="gearshape.fill" catalog="system"/>
                                                         <connections>
-                                                            <action selector="settingButtonTapped:" destination="a4B-Cq-z7W" eventType="touchUpInside" id="9Kn-3F-svK"/>
-                                                            <segue destination="Wp3-AA-fnC" kind="show" identifier="showSetting" id="cQd-Bp-kQ4"/>
+                                                            <segue destination="Wp3-AA-fnC" kind="show" identifier="showSetting" id="sgB-Lu-HpA"/>
                                                         </connections>
                                                     </button>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vcS-xX-0Ny" userLabel="Todo Table View">
@@ -309,7 +308,16 @@
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                                             <integer key="value" value="12"/>
                                                                         </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
+                                                                            <real key="value" value="0.10000000000000001"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOffset.height">
+                                                                            <integer key="value" value="2"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowRadius">
+                                                                            <integer key="value" value="4"/>
+                                                                        </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                             </subviews>
@@ -326,6 +334,7 @@
                                                             <outlet property="dDayLabel" destination="i2i-Yv-N0d" id="oUd-cb-hiz"/>
                                                             <outlet property="nameLabel" destination="hRu-yY-ldn" id="vSP-5k-UG7"/>
                                                             <outlet property="speciesLabel" destination="MGT-GT-ro7" id="hSb-f3-1qJ"/>
+                                                            <segue destination="o3G-lQ-c9D" kind="show" identifier="showPlantDetail" id="FBF-lK-YOw"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -386,7 +395,6 @@
                         <outlet property="todayTagLabel" destination="4QA-Iw-r8n" id="2mf-o7-lXk"/>
                         <outlet property="todoTableHeightConstraint" destination="7uB-yj-OaR" id="7Am-mP-BBz"/>
                         <outlet property="todoTableView" destination="vcS-xX-0Ny" id="mXe-s5-twv"/>
-                        <segue destination="o3G-lQ-c9D" kind="show" identifier="showPlantDetail" id="U78-IK-QA4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nVB-Om-1b6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -398,20 +406,20 @@
             <objects>
                 <viewController storyboardIdentifier="AddPlantVC" id="kWO-22-sOL" userLabel="식물 등록" customClass="AddPlantViewController" customModule="Planty" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wxs-Uj-Pa4">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="첫 모습을 기록해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXr-Zg-fpp" userLabel="Subtitle">
-                                <rect key="frame" x="20" y="183" width="119" height="19.333333333333343"/>
+                                <rect key="frame" x="20" y="136" width="119" height="19.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RJf-L3-bZs" userLabel="Photo View">
-                                <rect key="frame" x="20" y="212.33333333333337" width="353" height="230"/>
+                                <rect key="frame" x="20" y="165.33333333333337" width="353" height="230"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYC-02-doK">
-                                        <rect key="frame" x="146.66666666666666" y="84.999999999999972" width="60" height="60"/>
+                                        <rect key="frame" x="146.66666666666666" y="85" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="FQb-Y4-d2y"/>
                                             <constraint firstAttribute="height" constant="60" id="FUW-hZ-wmN"/>
@@ -437,7 +445,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="품종" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OLH-jq-wmm">
-                                <rect key="frame" x="20" y="482.33333333333331" width="353" height="43.999999999999943"/>
+                                <rect key="frame" x="20" y="435.33333333333331" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ndn-Dp-e5W"/>
                                 </constraints>
@@ -445,7 +453,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="시작 날짜" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fDp-pj-trl">
-                                <rect key="frame" x="20" y="610.33333333333337" width="353" height="44"/>
+                                <rect key="frame" x="20" y="563.33333333333337" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="PGs-KF-exv"/>
                                 </constraints>
@@ -453,7 +461,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="관수 주기" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vRD-2w-dqM">
-                                <rect key="frame" x="20" y="674.33333333333337" width="353" height="44"/>
+                                <rect key="frame" x="20" y="627.33333333333337" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="xHb-Fb-aqW"/>
                                 </constraints>
@@ -461,7 +469,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="별명" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KVk-Lh-RIy">
-                                <rect key="frame" x="20" y="546.33333333333337" width="353" height="44"/>
+                                <rect key="frame" x="20" y="499.33333333333326" width="353" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7iW-vE-43B"/>
                                 </constraints>
@@ -1191,7 +1199,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ueA-K1-UdL" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bqC-dI-RRs">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1260,7 +1268,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="F54-nn-jSp"/>
+        <segue reference="b78-xK-PAF"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
