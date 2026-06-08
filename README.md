@@ -1,4 +1,4 @@
-# 🌿 Planty (플랜티) - 반려식물 케어 & 성장 일지 iOS 애플리케이션
+# 🌿 Planty - 반려식물 케어 & 성장 일지 관리 iOS 애플리케이션
 
 > **iOS 프로그래밍 기말 미니 프로젝트**  
 > **개발 기간**: 2026.05 ~ 2026.06  
@@ -123,6 +123,7 @@ Core Data의 기본 속성은 복수의 이미지를 하나의 Attribute에 네�
 * **사용자 프로필**: `userName` 문자열 데이터를 디스크 캐싱하여 앱 최초 진입 로직 분기 및 다이나믹 라벨링에 사용합니다.
 * **일일 관수 체크리스트 실시간 기록**:
   식물 물주기 할 일(`TodoItem`)의 완료 상태는 매일 초기화되어야 합니다. 이를 처리하기 위해 식물의 고유 식별자(`plantId`)와 오늘 날짜를 결합한 **동적 하이브리드 키**를 생성하여 `UserDefaults`에 매핑합니다.
+  
   ```swift
   // 복합 키 생성 알고리즘
   private var todayKey: String {
@@ -260,16 +261,16 @@ Planty/
 │   │   ├── EncyclopediaPlant.swift   # 식물 도감 고정 리포지토리 (20종)
 │   │   └── TodoItem.swift            # 당일 관수 체크 일정 데이터 
 │   │
-│   ├── ViewControllers/              # UI Controllers (MVC - C)
-│   │   ├── TabBarController.swift    # 하단 탭 관리 뷰 컨트롤러
-│   │   ├── OnboardingViewController.swift # 앱 최초 진입 및 닉네임 캐싱
-│   │   ├── HomeViewController.swift  # 당일 일정, 정원 식물 동적 바인딩
-│   │   ├── AddPlantViewController.swift   # DatePicker & PickerView 연동 식물 등록
-│   │   ├── PlantDetailViewController.swift# 상세 관리 프로필 & 일지 목록 스크롤
-│   │   ├── AddDiaryViewController.swift  # PHPicker 멀티 로드 식물 기록 작성
-│   │   ├── EncyclopediaViewController.swift # 도감 다차원 정렬 & 실시간 서치
-│   │   ├── PlantEncycDetailViewController.swift # 도감 상세 관리 생육 정보 
-│   │   └── SettingViewController.swift   # 설정 (이름 변경, 앱 초기화)
+│   ├── ViewControllers/                           # UI Controllers (MVC - C)
+│   │   ├── TabBarController.swift                 # 하단 탭 관리 뷰 컨트롤러
+│   │   ├── OnboardingViewController.swift         # 앱 최초 진입 및 닉네임 캐싱
+│   │   ├── HomeViewController.swift               # 당일 일정, 정원 식물 동적 바인딩
+│   │   ├── AddPlantViewController.swift           # DatePicker & PickerView 연동 식물 등록
+│   │   ├── PlantDetailViewController.swift        # 상세 관리 프로필 & 일지 목록 스크롤
+│   │   ├── AddDiaryViewController.swift           # PHPicker 멀티 로드 식물 기록 작성
+│   │   ├── EncyclopediaViewController.swift       # 도감 다차원 정렬 & 실시간 서치
+│   │   ├── PlantEncycDetailViewController.swift   # 도감 상세 관리 생육 정보 
+│   │   └── SettingViewController.swift            # 설정 (이름 변경, 앱 초기화)
 │   │
 │   ├── Cells/                        # Custom Table/Collection View Cells (MVC - V)
 │   │   ├── PlantCell.swift           # 정원 메인 식물 셀
